@@ -1,7 +1,113 @@
 {
   "dataset_id": "day04_v2_research_group",
   "dataset_role": "group",
-  "description": "Template để NHÓM tự viết đúng 10 case: 5 single-turn dùng query và 5 multi-turn dùng turns. Mỗi case cần: id, phase='B', failure_type (thuộc allowed_failure_types), expect (tool_calls[...] hoặc no_tool=true), và metadata.what_it_tests. File để trống có chủ đích vì mỗi nhóm phải tự thiết kế các case này.",
+  "description": "Template để NHÓM tự viết đúng 10 case: 5 single-turn dùng query và 5 multi-turn dùng turns. Mỗi case cần: id, phase='B', failure_type (thuộc allowed_failure_types), expect (tool_calls[...] hoặc no_tool=true), và metadata.what_it_tests.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_paper_summary_url",
+      "phase": "B",
+      "suite": "base",
+      "query": "Tóm tắt giúp tôi bài báo này: https://arxiv.org/abs/2303.00001",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "fetch", "args": {"url": "https://arxiv.org/abs/2303.00001"}}]},
+      "metadata": {"skill": "research_read_url", "difficulty": "medium", "what_it_tests": "Đã có link paper cụ thể → dùng fetch, không dùng lookup hoặc social_search."}
+    },
+    {
+      "id": "G02_research_news_trend",
+      "phase": "B",
+      "suite": "base",
+      "query": "Tin tức nghiên cứu AI nổi bật trong tuần này là gì?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "AI research", "topic": "news", "timeframe": "week"}}]},
+      "metadata": {"skill": "research_news_lookup", "difficulty": "medium", "what_it_tests": "Yêu cầu tin tức nghiên cứu tuần này → lookup topic=news timeframe=week."}
+    },
+    {
+      "id": "G03_social_mentions_topic",
+      "phase": "B",
+      "suite": "base",
+      "query": "Tìm các tweet đang thảo luận về 'scientific reproducibility'",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "social_search", "args": {"query": "scientific reproducibility"}}]},
+      "metadata": {"skill": "research_social_search", "difficulty": "medium", "what_it_tests": "Chủ đề nghiên cứu trên mạng xã hội → dùng social_search, không dùng timeline."}
+    },
+    {
+      "id": "G04_researcher_tweets",
+      "phase": "B",
+      "suite": "base",
+      "query": "Tweet mới nhất của Yann LeCun là gì?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "ylecun", "limit": 1}}]},
+      "metadata": {"skill": "researcher_timeline", "difficulty": "easy", "what_it_tests": "Tweet của một nhà nghiên cứu cụ thể → timeline, không dùng social_search."}
+    },
+    {
+      "id": "G05_research_agent_meta",
+      "phase": "B",
+      "suite": "base",
+      "query": "Bạn có thể giúp tôi làm gì trong nghiên cứu khoa học?",
+      "failure_type": "unnecessary_tool",
+      "expect": {"no_tool": true, "behavior": "answer_without_tool"},
+      "metadata": {"skill": "research_meta_answer", "difficulty": "easy", "what_it_tests": "Câu hỏi meta về khả năng agent → trả lời trực tiếp, không gọi tool."}
+    },
+    {
+      "id": "G06_clarify_missing_paper",
+      "phase": "B",
+      "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Tóm tắt bài báo khoa học này cho tôi."},
+        {"role": "user", "content": "https://arxiv.org/abs/2401.00002"}
+      ],
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "text"}}]},
+      "metadata": {"skill": "multiturn_clarify_url", "difficulty": "medium", "what_it_tests": "Thiếu URL paper lúc đầu → chỉ dùng clarify để hỏi thêm, không tự đoán link."}
+    },
+    {
+      "id": "G07_topic_switch_to_robotics",
+      "phase": "B",
+      "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Cho tôi tin tức nghiên cứu AI mới nhất."},
+        {"role": "user", "content": "Đổi thành robotics nhé, vẫn là tin hôm nay."}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "robotics", "topic": "news", "timeframe": "day"}}]},
+      "metadata": {"skill": "multiturn_topic_refinement", "difficulty": "hard", "what_it_tests": "Chuyển chủ đề trong cuộc hội thoại và giữ timeframe=day cho tin hôm nay."}
+    },
+    {
+      "id": "G08_switch_from_tweets_to_news",
+      "phase": "B",
+      "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Tìm tweet về research reproducibility."},
+        {"role": "user", "content": "Không, tôi muốn tin tức khoa học trên web."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "research reproducibility", "topic": "news"}}]},
+      "metadata": {"skill": "multiturn_tool_switch", "difficulty": "hard", "what_it_tests": "Người dùng chuyển từ tweet sang tin tức web, agent phải chuyển tool từ social_search sang lookup."}
+    },
+    {
+      "id": "G09_timeline_limit_correction",
+      "phase": "B",
+      "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Tóm tắt 8 tweet mới nhất của một nhà nghiên cứu."},
+        {"role": "user", "content": "Của Fei-Fei Li, chỉ lấy 4 thôi."}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "drfeifei", "limit": 4}}]},
+      "metadata": {"skill": "multiturn_limit_adjustment", "difficulty": "hard", "what_it_tests": "Sửa số lượng tweet từ 8 thành 4 và giữ đúng handle nhà nghiên cứu."}
+    },
+    {
+      "id": "G10_clarify_topic_for_social_search",
+      "phase": "B",
+      "suite": "base",
+      "turns": [
+        {"role": "user", "content": "Tìm các bài đăng về reproducibility."},
+        {"role": "user", "content": "Ý tôi là reproducibility trong khoa học dữ liệu."}
+      ],
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "text"}}]},
+      "metadata": {"skill": "multiturn_clarify_topic", "difficulty": "medium", "what_it_tests": "Cần dùng clarify nếu query ban đầu quá mơ hồ cho social_search."}
+    }
+  ]
 }
