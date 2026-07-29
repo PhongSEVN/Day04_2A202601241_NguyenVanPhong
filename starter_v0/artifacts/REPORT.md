@@ -68,67 +68,43 @@ Agent này là một research assistant chuyên tìm và tổng hợp thông tin
 
 ## B1. Version evidence
 
-Fill from `artifacts/version_log.csv` and `runs/*.json`.
+The workspace currently contains one concrete v0 run with measurable results: `runs/v0_B_base_openai_20260729T093024057807.json`. No real v1/v2/v3 run files were present in the workspace, so the v1-v3 rows below are target values expected after the prompt/tool changes rather than observed numbers.
 
-| Version | Prompt/tool change | Hypothesis | Metric name | Before | After | Run File |
-|---|---|---|---|---:|---:|---|
-| v0 | baseline prompt + vague tool descriptions | Baseline agent often chooses the wrong tool for social vs user tweet vs news requests, and does not clarify missing params. | tool_selection_accuracy; argument_accuracy; case_accuracy | tool_selection_accuracy ~0.75; argument_accuracy ~0.70; case_accuracy ~0.70 | baseline | `runs/v0_B_base_openai_20260729T093024057807.json` |
-| v1 | clarify tool roles in `system_prompt.md` and `tools.yaml` | If routing guidance is explicit, the agent will choose the correct tool more consistently for tweets, social search, lookup, and fetch. | tool_selection_accuracy; wrong_tool_rate | 0.75 | target 0.90+ | pending |
-| v2 | require `clarify` for missing required args and tighten parameter definitions | If the agent is forced to ask when required input is missing and tool args are described clearly, argument accuracy will improve and missing-info failures will drop. | parameter_extraction_accuracy; missing_info_rate; args_correct | 0.70 | target 0.90+ | pending |
-| v3 | add no-tool boundary rules and explicit send-use guidance | If the agent only calls tools for explicit external information requests and only uses `send` for publishing requests, unnecessary tool calls and boundary failures will decline. | overall_task_success; no_tool_accuracy; unnecessary_tool_call_rate | 0.70 | target 0.95+ | pending |
+| Version | Source | Prompt/tool change | Case accuracy | Tool routing accuracy | Argument accuracy | Notes |
+|---|---|---|---:|---:|---:|---|
+| v0 | `runs/v0_B_base_openai_20260729T093024057807.json` | baseline prompt + vague tool descriptions | 0.70 | 0.75 | 0.70 | 14/20 passed; main issues were out-of-scope handling and missing clarification |
+| v1 | target (no run log yet) | clearer tool-role routing in `system_prompt.md` and `tools.yaml` | 0.80+ | 0.85+ | 0.80+ | expected to reduce wrong-tool routing errors |
+| v2 | target (no run log yet) | stronger `clarify` rules and clearer paper-summary schema | 0.85+ | 0.90+ | 0.85+ | expected to reduce wrong-argument and missing-info failures |
+| v3 | target (no run log yet) | no-tool boundary rules and explicit `send`/publish guardrails | 0.90+ | 0.95+ | 0.90+ | expected to reduce boundary and unnecessary-tool errors |
 
 ## B2. Failure analysis
 
-Use actual failures from `results[*].result.failures`.
+Based on the observed v0 run, the main failure modes were:
 
-| Case ID | Failure Type | Actual Tool Calls | What Failed | Fix |
-|---|---|---|---|---|
-| R05_limit_arg | wrong_arg_value | timeline | `limit` value or interpretation was wrong for a user tweet request. | tighten timeline argument guidance and require the agent to use default limit only when user asks for multiple tweets.
-| R06_timeframe_arg | wrong_arg_value | lookup | `timeframe` not explicitly set for a news request. | mandate `timeframe=day` for "hôm nay"/"today" and add guidance in `system_prompt.md`.
-| R07_search_type_arg | wrong_arg_value | social_search | `search_type` may have defaulted incorrectly for topic-based social search. | clarify `Latest` vs `Top` and choose `Latest` for current conversation trends.
-| R10_missing_handle | missing_info | clarify then timeline | agent failed to ask for a missing Twitter handle before calling timeline. | require use of `clarify` if `screenname` is unspecified for timeline.
-| R11_missing_url | missing_info | clarify then fetch | agent failed to ask for a missing URL before calling fetch. | require use of `clarify` if `url` is missing for fetch.
-| R12_confirm_before_send | wrong_boundary | clarify then send | agent used `send` instead of clarifying a missing information request. | restrict `send` to explicit publish/send actions and use `clarify` first when required arguments are absent.
-
-## B6. Reflection
-
-- Fixes in `system_prompt.md`:
-  - explicit routing rules for `timeline`, `social_search`, `lookup`, `fetch`, and `send`
-  - the requirement that tools are only used when the user requests external data
-  - the instruction to ask `clarify` when required tool arguments are missing
-- Fixes in `tools.yaml`:
-  - clearer tool descriptions and explicit role definitions
-  - stronger parameter descriptions for `screenname`, `query`, `topic`, `timeframe`, and `url`
-  - guidance that `lookup` uses `topic=news` for news-specific requests
-- Failure cases needing manual review:
-  - any tool execution error from `tool_results` is not enough to mark success; runtime failures such as missing API keys must be reviewed separately.
-- Next improvements:
-  - add a v1 run after the prompt/tool updates and compare actual run metrics
-  - expand the eval set with more boundary cases for no-tool responses and publishing requests
-  - add a short `artifacts/REPORT.md` summary section in PHẦN A so reviewers can see the three-version hypothesis quickly
+| Category | Evidence from v0 log | Root cause | Recommended fix |
+|---|---|---|---|
+| wrong_tool / routing | `observed_mismatch_counts.missing_tool_call = 3` | tool descriptions and routing rules were too vague, so the agent sometimes chose the wrong tool or missed the expected tool call | tighten routing rules in `system_prompt.md` and make tool descriptions more concrete |
+| wrong_arg_value | `observed_mismatch_counts.wrong_arg_value = 1` | parameter extraction was not explicit enough for values such as `limit`, `timeframe`, and `search_type` | define defaults and expected arg mapping more clearly in `tools.yaml` |
+| missing_info | `failure_counts.missing_info = 2` | the agent did not consistently ask for missing handle/URL before acting | require `clarify` when required info is absent |
+| wrong_boundary | `failure_counts.wrong_boundary = 1` | the agent did not consistently distinguish between a publish/send action and a normal information request | add explicit boundary rules for `send` and no-tool answers |
+| out_of_scope | `failure_counts.out_of_scope = 2` | the agent sometimes attempted tool use for requests that should be answered directly | add a no-tool fallback rule for out-of-scope requests |
 
 ## B3. Team eval cases
 
-List the 10 cases added to `data/eval_group.json`:
-
-- 5 single-turn
-- 5 multi-turn
-
-This section is for the mandatory team-authored eval set. Optional built-ins do
-not belong here.
+The 10 team-authored cases were added in `data/eval_group.json` and are grouped into single-turn and multi-turn scenarios for research-summary style tasks.
 
 | Case ID | What It Tests | Expected Tool/Behavior | Result |
 |---|---|---|---|
-| G01_paper_summary_url | Tóm tắt paper từ URL cụ thể | fetch(url) | pending |
-| G02_research_news_trend | Tin tức nghiên cứu AI trong tuần này | lookup(query="AI research", topic="news", timeframe="week") | pending |
-| G03_social_mentions_topic | Tìm tweet về một chủ đề nghiên cứu | social_search(query="scientific reproducibility") | pending |
-| G04_researcher_tweets | Tweet mới nhất của nhà nghiên cứu cụ thể | timeline(screenname="ylecun", limit=1) | pending |
-| G05_research_agent_meta | Câu hỏi meta về khả năng agent | no_tool answer | pending |
-| G06_clarify_missing_paper | Thiếu link paper ở lượt đầu | clarify(response_type="text") | pending |
-| G07_topic_switch_to_robotics | Chuyển chủ đề từ AI sang robotics trong hội thoại | lookup(query="robotics", topic="news", timeframe="day") | pending |
-| G08_switch_from_tweets_to_news | Chuyển từ tweet sang tin tức web trong multi-turn | lookup(query="research reproducibility", topic="news") | pending |
-| G09_timeline_limit_correction | Sửa limit timeline từ 8 xuống 4 | timeline(screenname="drfeifei", limit=4) | pending |
-| G10_clarify_topic_for_social_search | Yêu cầu social search nhưng query mơ hồ | clarify(response_type="text") | pending |
+| G01_paper_summary_url | summarize a paper from a URL | `paper_summarizer(query=<url>, summary_format=brief)` | pending / not run yet |
+| G02_research_news_trend | news lookup for AI research this week | `lookup(query="AI research", topic="news", timeframe="week")` | pending / not run yet |
+| G03_social_mentions_topic | topic-based social search | `social_search(query="scientific reproducibility")` | pending / not run yet |
+| G04_researcher_tweets | tweet retrieval for a named researcher | `timeline(screenname="ylecun", limit=1)` | pending / not run yet |
+| G05_research_agent_meta | meta-question about the agent | no tool; direct answer | pending / not run yet |
+| G06_clarify_missing_paper | missing paper URL in multi-turn flow | `clarify` first, then `paper_summarizer` | pending / not run yet |
+| G07_topic_switch_to_robotics | topic change from AI to robotics in conversation | `lookup(query="robotics", topic="news", timeframe="day")` | pending / not run yet |
+| G08_switch_from_tweets_to_news | switch from tweet search to news search | `lookup(query="research reproducibility", topic="news")` | pending / not run yet |
+| G09_timeline_limit_correction | adjust tweet count after clarification | `timeline(screenname="drfeifei", limit=4)` | pending / not run yet |
+| G10_clarify_topic_for_social_search | ambiguous topic for social search | `clarify` before tool use | pending / not run yet |
 
 ## B4. Live chat evidence
 

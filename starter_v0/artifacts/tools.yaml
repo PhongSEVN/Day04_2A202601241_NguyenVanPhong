@@ -52,6 +52,36 @@ tools:
         url: {type: string, default: "", description: "The full URL to fetch content from."}
       required: [url]
 
+  - name: paper_summarizer
+    description: "Summarize a scientific paper from a provided URL, paper title, or short query. Use this tool when the user explicitly asks to summarize a paper."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Paper URL, paper title, or short description of the paper to summarize."}
+        max_chars: {type: integer, default: 3000, description: "Maximum characters to return in the summary."}
+        summary_format: {type: string, enum: [brief, bullets, detailed], default: "brief", description: "Preferred output style for the summary."}
+      required: [query]
+
+  - name: papers
+    description: "Search for scientific papers by keyword. Use only when the user asks about academic papers or research literature."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Paper search query."}
+        max_results: {type: integer, default: 5, description: "Maximum number of paper results."}
+        sort_by: {type: string, enum: [relevance, lastUpdatedDate, submittedDate], default: "relevance", description: "Sort order for paper results."}
+      required: [query]
+
+  - name: paper_text
+    description: "Retrieve text content from a paper when the user provides a paper identifier or URL."
+    parameters:
+      type: object
+      properties:
+        arxiv_url: {type: string, default: "", description: "ArXiv URL or paper identifier."}
+        max_pages: {type: integer, default: 5, description: "Maximum number of pages to retrieve."}
+        max_chars: {type: integer, default: 8000, description: "Maximum number of characters to retrieve."}
+      required: [arxiv_url]
+
   - name: format
     description: "Format an existing list of items into human-readable text. Use only when the agent already has structured item data and needs to render it."
     parameters:
@@ -92,23 +122,3 @@ tools:
         policy_area: {type: string, enum: [all, ai_research, source_citation, data_privacy, external_publishing, tool_usage], default: "all", description: "Select a specific policy area if known."}
         top_k: {type: integer, default: 3, description: "Maximum number of policy documents or passages to return."}
       required: [query]
-
-  - name: papers
-    description: "Search for scientific papers by keyword. Use only when the user asks about academic papers or research literature."
-    parameters:
-      type: object
-      properties:
-        query: {type: string, default: "", description: "Paper search query."}
-        max_results: {type: integer, default: 5, description: "Maximum number of paper results."}
-        sort_by: {type: string, enum: [relevance, lastUpdatedDate, submittedDate], default: "relevance", description: "Sort order for paper results."}
-      required: [query]
-
-  - name: paper_text
-    description: "Retrieve text content from a paper when the user provides a paper identifier or URL."
-    parameters:
-      type: object
-      properties:
-        arxiv_url: {type: string, default: "", description: "ArXiv URL or paper identifier."}
-        max_pages: {type: integer, default: 5, description: "Maximum number of pages to retrieve."}
-        max_chars: {type: integer, default: 8000, description: "Maximum number of characters to retrieve."}
-      required: [arxiv_url]
