@@ -34,33 +34,33 @@ Agent này là một research assistant chuyên tìm và tổng hợp thông tin
 
 ## A2. Tool agent có
 
-| Tên tool     | Làm được gì                                                    | Tool mới nhóm thêm? |
+| Tên tool | Làm được gì | Tool mới nhóm thêm? |
 | ------------- | ------------------------------------------------------------------- | ---------------------- |
-| clarify       | hỏi lại người dùng khi thiếu thông tin trước khi gọi tool | không                 |
-| timeline      | lấy tweet gần nhất từ một Twitter handle cụ thể              | không                 |
-| social_search | tìm bài viết/tweet theo chủ đề hoặc từ khóa                | không                 |
-| lookup        | tra cứu thông tin chung hoặc tin tức trên web                  | không                 |
-| fetch         | đọc nội dung của một URL cụ thể                              | không                 |
-| format        | định dạng dữ liệu có sẵn thành bài viết/summary           | không                 |
-| send          | gửi hoặc publish nội dung khi user yêu cầu                     | không                 |
+| clarify | hỏi lại người dùng khi thiếu thông tin trước khi gọi tool | không |
+| timeline | lấy tweet gần nhất từ một Twitter handle cụ thể | không |
+| social_search | tìm bài viết/tweet theo chủ đề hoặc từ khóa | không |
+| lookup | tra cứu thông tin chung hoặc tin tức trên web | không |
+| fetch | đọc nội dung của một URL cụ thể | không |
+| format | định dạng dữ liệu có sẵn thành bài viết/summary | không |
+| send | gửi hoặc publish nội dung khi user yêu cầu | không |
 
 ## A3. Câu hỏi mẫu để thử
 
 1. "Hãy cho tôi tweet mới nhất của Sam Altman."
 2. "Mọi người đang nói gì về GPT-5 trên Twitter?"
 3. "Tin tức AI hôm nay có gì nổi bật?"
-4. "Đọc giúp tôi nội dung bài này: https://example.com/article"
+4. "Đọc giúp tôi nội dung bài này: <https://example.com/article>"
 5. "Tôi đã sẵn sàng, hãy gửi thông báo này đi."
 
 ## A4. Kịch bản demo đã rehearse
 
-| Scenario                            | Tool trace cần thấy                                                 | Câu chuyện cải thiện version                       | Fallback run/transcript |
+| Scenario | Tool trace cần thấy | Câu chuyện cải thiện version | Fallback run/transcript |
 | ----------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------ | ----------------------- |
-| Tìm tweet của người nổi tiếng | `clarify` nếu thiếu handle, sau đó `timeline(screenname=...)` | v1: đúng tool`timeline` thay vì `social_search` | R01/R10                 |
-| Tìm thảo luận theo chủ đề     | `social_search(query=..., search_type=Latest)`                      | v1: phân biệt`social_search` và `timeline`      | R02/R07                 |
-| Tìm tin tức hôm nay              | `lookup(query=..., topic=news, timeframe=day)`                      | v2: gán timeframe chính xác cho "hôm nay"          | R03/R06                 |
-| Đọc URL cụ thể                  | `clarify` nếu thiếu url, sau đó `fetch(url=...)`              | v2: clarify khi thiếu tham số bắt buộc             | R04/R11                 |
-| Trả lời không cần tool          | không gọi tool nếu user chỉ hỏi nội dung chung                  | v3: boundary no-tool đúng                            | R08/R14                 |
+| Tìm tweet của người nổi tiếng | `clarify` nếu thiếu handle, sau đó `timeline(screenname=...)` | v1: đúng tool`timeline` thay vì `social_search` | R01/R10 |
+| Tìm thảo luận theo chủ đề | `social_search(query=..., search_type=Latest)` | v1: phân biệt`social_search` và `timeline` | R02/R07 |
+| Tìm tin tức hôm nay | `lookup(query=..., topic=news, timeframe=day)` | v2: gán timeframe chính xác cho "hôm nay" | R03/R06 |
+| Đọc URL cụ thể | `clarify` nếu thiếu url, sau đó `fetch(url=...)` | v2: clarify khi thiếu tham số bắt buộc | R04/R11 |
+| Trả lời không cần tool | không gọi tool nếu user chỉ hỏi nội dung chung | v3: boundary no-tool đúng | R08/R14 |
 
 ---
 
