@@ -12,7 +12,7 @@
 |  2  | **Vũ Huy Hoàng**      |  2A202601057  | Role 1 — Prompt & Agent Architect      |      Member      | `artifacts/system_prompt.md`, `artifacts/tools.yaml`                |
 |  3  | **Nguyễn Thanh Phúc** |  2A202601345  | Role 2 — Tool Developer                |      Member      | `tools/paper_summarizer/`, `tools/__init__.py`, `.env`            |
 |  4  | **Phạm Khánh Linh**   |  2A202601507  | Role 3 — Eval & QA Specialist          |      Member      | `data/dataset.json`, `data/eval_group.json`, `run_eval.py`        |
-|  5  | **Lê Thị Yến Nhi**   |  2A202601031  | Role 4 — UI & Cloud Deployer           |      Member      | `app.py`, `requirements.txt`, Cloudflare Tunnel                     |
+|  5  | **Lê Thị Yến Nhi**   |  2A202601031  | Role 4 — UI & Cloud Deployer           |      Member      | `server.py`, `client/` (React + Vite), Cloudflare Tunnel            |
 
 ---
 
@@ -55,7 +55,7 @@ graph TD
 
 **Handoff 12:00**: Phúc & Linh báo xong, có file log v0. Hoàng sẵn sàng edit prompt. Yến Nhi app ready.
 
-* **✅ Sản phẩm hoàn thành Phase 1**: `runs/v0_baseline.json` (accuracy ≥70%), `.env` kết nối OK, Streamlit app stub, notes lỗi
+* **✅ Sản phẩm hoàn thành Phase 1**: `runs/v0_baseline.json` (accuracy ≥70%), `.env` kết nối OK, React client chạy được (`npm run dev`), notes lỗi
 
 ---
 
@@ -78,7 +78,7 @@ graph TD
   - `starter_v0/data/eval_group.json` (10 test cases ✓)
   - `starter_v0/artifacts/system_prompt.md` v2 draft
   - `starter_v0/artifacts/tools.yaml` schema v2
-  - `starter_v0/app.py` Streamlit UI ✓
+  - `starter_v0/server.py` (Flask) + `starter_v0/client/` (React/Vite) UI ✓
   - `starter_v0/artifacts/REPORT.md` Part A ✓
 
 ---
@@ -132,8 +132,26 @@ graph TD
 **Handoff 60:00**: Demo time!
 
 * **✅ Sản phẩm hoàn thành Phase 4**:
-  - `app.py` deployed on public URL (Cloudflare Tunnel)
+  - `server.py` + `client/` deployed on public URL (Cloudflare Tunnel)
   - `artifacts/REPORT.md` FINAL (Part A + Part B + Demo guide)
   - `artifacts/version_log.csv` complete (v0-v3)
   - `starter_v0/` folder clean & ready to submit
   - Optional: `README.md` with setup instructions
+
+---
+
+## 📋 5. TRẠNG THÁI HOÀN THÀNH TỪNG ROLE (cập nhật tự động từ dữ liệu thật trong repo)
+
+| Role | Người | Việc chính | Trạng thái | Ghi chú |
+|---|---|---|:---:|---|
+| Role 1 | Vũ Huy Hoàng | `system_prompt.md`, `tools.yaml`, routing rules | 🟡 Gần xong | Đã có 2 vòng sửa thật (hash khác nhau); thiếu routing rule cho `dataset_lookup`; **bản `system_prompt.md`/`tools.yaml` đang commit trên HEAD hiện KHÁC hash với mọi run trong `runs/`** — nghĩa là bản mới nhất chưa được eval lần nào. |
+| Role 2 | Nguyễn Thanh Phúc | Tool mới: `dataset_lookup`, `paper_summarizer` | ✅ Xong | Cả 2 tool đã có `tool.py` + `TOOL.md`, đăng ký trong `tools/__init__.py` **và** khai báo đủ trong `tools.yaml` (12/12 tool khớp tên xuyên suốt `tools.yaml` ↔ `tools/__init__.py` ↔ `eval_base.json` ↔ `eval_group.json`, đã cross-check). |
+| Role 3 | Phạm Khánh Linh | `eval_group.json` (10 case), chạy eval | ✅ Xong phần chạy | 10 case (5 single + 5 multi) đã viết lại, phủ đủ 6 failure_type. Đã chạy đủ base + group cho v1/v2/v3 (`runs/`). **Nhưng** vì Role 1 còn sửa `system_prompt.md` sau lần chạy cuối, cần chạy lại v3 một lần nữa trước khi nộp. |
+| Role 4 | Lê Thị Yến Nhi | UI (React+Vite) + Flask backend + Cloudflare Tunnel | ✅ Xong | Chat UI, trace tool call, lịch sử hội thoại, memories phiên, deploy thử qua tunnel thành công. |
+| Role 5 | Nguyễn Văn Phong | `REPORT.md`, `version_log.csv`, demo | 🟡 Đang làm | Phần A còn dữ liệu placeholder (link demo, câu hỏi mẫu theo tool cũ); Phần B đang dùng số liệu ước tính "target", chưa cập nhật số liệu thật đã có sẵn trong `runs/`. `version_log.csv` có lẫn vài dòng số liệu không có run file thật đứng sau — cần rà lại trước khi nộp. |
+
+**Việc chung còn thiếu trước khi nộp bài (theo README "Submit"):**
+- [ ] Chạy lại 1 vòng eval cuối (base + group) sau khi Role 1 chốt `system_prompt.md`/`tools.yaml` — bản hiện tại trên HEAD chưa có run nào đo.
+- [ ] Thêm routing rule cho `dataset_lookup` vào `system_prompt.md`.
+- [ ] `REPORT.md` Phần A: dán link Cloudflare Tunnel thật, cập nhật câu hỏi mẫu theo domain tóm tắt bài báo (hiện đang là câu hỏi về tweet/tin tức từ bộ tool cũ).
+- [ ] `transcripts/`: còn thiếu 2/3 kịch bản live-turn README yêu cầu (thiếu thông tin → hỏi lại → bổ sung; hành động nhạy cảm → xác nhận trước khi `send`). Các transcript hiện có mới chỉ test được "yêu cầu nghiên cứu bình thường".

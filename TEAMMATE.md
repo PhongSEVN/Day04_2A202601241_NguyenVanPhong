@@ -8,7 +8,7 @@
 | 2 | **Vũ Huy Hoàng** | 2A202601057 | Role 1 — Prompt & Agent Architect | Member | `artifacts/system_prompt.md`, `artifacts/tools.yaml` |
 | 3 | **Nguyễn Thanh Phúc** | 2A202601345 | Role 2 — Tool Developer | Member | `tools/<tool_moi>/`, `tools/__init__.py`, `.env` & API setup |
 | 4 | **Phạm Khánh Linh** | 2A202601507 | Role 3 — Eval & QA Specialist | Member | `data/eval_group.json`, `run_eval.py`, `analysis/*.csv` |
-| 5 | **Lê Thị Yến Nhi** | 2A202601031 | Role 4 — UI & Cloud Deployer | Member | `app.py`, `requirements.txt`, Cloudflare Tunnel |
+| 5 | **Lê Thị Yến Nhi** | 2A202601031 | Role 4 — UI & Cloud Deployer | Member | `server.py`, `client/` (React + Vite), Cloudflare Tunnel |
 
 ---
 
@@ -55,9 +55,9 @@
 
 ---
 
-### 5. Lê Thị Yến Nhi (MSV: 2A202601031) — **Role 4: UI & Cloud Deployer**
-- **Nhiệm vụ chính**:
-  - Lập trình ứng dụng Web Chat tương tác cho Agent bằng Streamlit (`app.py`).
-  - Đảm bảo giao diện hiển thị: Khung chat, Trace chi tiết lịch sử gọi tool (tên tool, tham số, kết quả/lỗi), và Version Agent đang chạy.
-  - Cập nhật file `requirements.txt` (thêm `streamlit>=1.30.0`).
-  - Thực thi Cloudflare Tunnel (`cloudflared tunnel --url http://localhost:8501`) để cung cấp Public URL kết nối ứng dụng cho nhóm khác test.
+### 5. Lê Thị Yến Nhi (MSV: 2A202601031) — **Role 4: UI & Cloud Deployer** ✅ Hoàn thành
+- **Nhiệm vụ chính** (đổi từ Streamlit sang **React + Vite + Flask** — cả nhóm đã thống nhất):
+  - Backend `starter_v0/server.py` (Flask): bọc `run_model_tool_loop` có sẵn trong `chat.py`, expose `/api/health`, `/api/tools`, `/api/sessions`, `/api/chat`.
+  - Frontend `starter_v0/client/` (React 19 + Vite + Tailwind): khung chat, trace chi tiết từng tool call (tên, tham số, round/status, kết quả/lỗi), sidebar lịch sử trò chuyện + memories phiên, badge version agent đang chạy.
+  - Cập nhật `requirements.txt` (thêm `Flask>=3.0.0`).
+  - Thực thi Cloudflare Tunnel (`cloudflared tunnel --url http://localhost:5173`) để cung cấp Public URL kết nối ứng dụng cho nhóm khác test — đã deploy thử thành công.
