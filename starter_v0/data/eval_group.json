@@ -1,113 +1,263 @@
 {
   "dataset_id": "day04_v2_research_group",
   "dataset_role": "group",
-  "description": "Template để NHÓM tự viết đúng 10 case: 5 single-turn dùng query và 5 multi-turn dùng turns. Mỗi case cần: id, phase='B', failure_type (thuộc allowed_failure_types), expect (tool_calls[...] hoặc no_tool=true), và metadata.what_it_tests.",
+  "description": "10 case do Role 3 trong PROJECT_PLAN.md tự viết từ dữ liệu OpenAlex trong data/dataset.json: 5 single-turn dùng query và 5 multi-turn dùng turns. Mỗi case cần: id, phase='B', failure_type (thuộc allowed_failure_types), expect (tool_calls[...] hoặc no_tool=true), và metadata.what_it_tests.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
   "cases": [
     {
-      "id": "G01_paper_summary_url",
+      "id": "SG01_fetch_1996_hrv_doi",
       "phase": "B",
-      "suite": "base",
-      "query": "Tóm tắt giúp tôi bài báo này: https://arxiv.org/abs/2303.00001",
+      "query": "Mở bài Heart Rate Variability theo DOI https://doi.org/10.1161/01.cir.93.5.1043.",
       "failure_type": "wrong_tool",
-      "expect": {"tool_calls": [{"name": "fetch", "args": {"url": "https://arxiv.org/abs/2303.00001"}}]},
-      "metadata": {"skill": "research_read_url", "difficulty": "medium", "what_it_tests": "Đã có link paper cụ thể → dùng fetch, không dùng lookup hoặc social_search."}
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://doi.org/10.1161/01.cir.93.5.1043"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Paper 1996 Heart Rate Variability có DOI rõ ràng → phải dùng fetch đúng DOI URL, không đi web_search chung chung."
+      }
     },
     {
-      "id": "G02_research_news_trend",
+      "id": "SG02_lookup_hrv_standards_title",
       "phase": "B",
-      "suite": "base",
-      "query": "Tin tức nghiên cứu AI nổi bật trong tuần này là gì?",
+      "query": "Tìm bài Heart rate variability: Standards of measurement, physiological interpretation, and clinical use.",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Heart rate variability: Standards of measurement, physiological interpretation, and clinical use"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Paper tiêu biểu năm 1996 trong dataset → lookup bằng đúng title paper, không đổi sang query mơ hồ."
+      }
+    },
+    {
+      "id": "SG03_fetch_overview_pdf",
+      "phase": "B",
+      "query": "Mở PDF của An Overview of Heart Rate Variability Metrics and Norms.",
       "failure_type": "wrong_tool",
-      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "AI research", "topic": "news", "timeframe": "week"}}]},
-      "metadata": {"skill": "research_news_lookup", "difficulty": "medium", "what_it_tests": "Yêu cầu tin tức nghiên cứu tuần này → lookup topic=news timeframe=week."}
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://www.frontiersin.org/articles/10.3389/fpubh.2017.00258/pdf"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Paper 2017 có PDF OA trong dataset → phải fetch trực tiếp PDF URL."
+      }
     },
     {
-      "id": "G03_social_mentions_topic",
+      "id": "SG04_lookup_kubios_hrv",
       "phase": "B",
-      "suite": "base",
-      "query": "Tìm các tweet đang thảo luận về 'scientific reproducibility'",
+      "query": "Tìm bài Kubios HRV Heart rate variability analysis software.",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Kubios HRV Heart rate variability analysis software"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Paper tool/software overview trong dataset → lookup theo title gần như nguyên văn để tránh lạc sang chủ đề HRV chung."
+      }
+    },
+    {
+      "id": "SG05_fetch_stress_meta_pdf",
+      "phase": "B",
+      "query": "Đọc PDF của Stress and Heart Rate Variability: A Meta-Analysis and Review of the Literature.",
       "failure_type": "wrong_tool",
-      "expect": {"tool_calls": [{"name": "social_search", "args": {"query": "scientific reproducibility"}}]},
-      "metadata": {"skill": "research_social_search", "difficulty": "medium", "what_it_tests": "Chủ đề nghiên cứu trên mạng xã hội → dùng social_search, không dùng timeline."}
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "http://psychiatryinvestigation.org/upload/pdf/pi-2017-08-17.pdf"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Paper 2018 có PDF OA trong dataset → phải fetch đúng link PDF, không cần lookup web trước."
+      }
     },
     {
-      "id": "G04_researcher_tweets",
+      "id": "MG01_multi_lookup_review_title",
       "phase": "B",
-      "suite": "base",
-      "query": "Tweet mới nhất của Yann LeCun là gì?",
-      "failure_type": "wrong_tool",
-      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "ylecun", "limit": 1}}]},
-      "metadata": {"skill": "researcher_timeline", "difficulty": "easy", "what_it_tests": "Tweet của một nhà nghiên cứu cụ thể → timeline, không dùng social_search."}
-    },
-    {
-      "id": "G05_research_agent_meta",
-      "phase": "B",
-      "suite": "base",
-      "query": "Bạn có thể giúp tôi làm gì trong nghiên cứu khoa học?",
-      "failure_type": "unnecessary_tool",
-      "expect": {"no_tool": true, "behavior": "answer_without_tool"},
-      "metadata": {"skill": "research_meta_answer", "difficulty": "easy", "what_it_tests": "Câu hỏi meta về khả năng agent → trả lời trực tiếp, không gọi tool."}
-    },
-    {
-      "id": "G06_clarify_missing_paper",
-      "phase": "B",
-      "suite": "base",
       "turns": [
-        {"role": "user", "content": "Tóm tắt bài báo khoa học này cho tôi."},
-        {"role": "user", "content": "https://arxiv.org/abs/2401.00002"}
+        {
+          "role": "user",
+          "content": "Mình cần một bài review về HRV."
+        },
+        {
+          "role": "user",
+          "content": "Bài của Fred Shaffer năm 2017 ấy."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ tìm đúng paper đó thôi."
+        }
       ],
       "failure_type": "missing_info",
-      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "text"}}]},
-      "metadata": {"skill": "multiturn_clarify_url", "difficulty": "medium", "what_it_tests": "Thiếu URL paper lúc đầu → chỉ dùng clarify để hỏi thêm, không tự đoán link."}
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "An Overview of Heart Rate Variability Metrics and Norms"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Multi-turn dùng ngữ cảnh để ghép đúng paper 2017 của Fred Shaffer thành title chuẩn trong dataset."
+      }
     },
     {
-      "id": "G07_topic_switch_to_robotics",
+      "id": "MG02_multi_fetch_doi_from_context",
       "phase": "B",
-      "suite": "base",
       "turns": [
-        {"role": "user", "content": "Cho tôi tin tức nghiên cứu AI mới nhất."},
-        {"role": "user", "content": "Đổi thành robotics nhé, vẫn là tin hôm nay."}
-      ],
-      "failure_type": "wrong_arg_value",
-      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "robotics", "topic": "news", "timeframe": "day"}}]},
-      "metadata": {"skill": "multiturn_topic_refinement", "difficulty": "hard", "what_it_tests": "Chuyển chủ đề trong cuộc hội thoại và giữ timeframe=day cho tin hôm nay."}
-    },
-    {
-      "id": "G08_switch_from_tweets_to_news",
-      "phase": "B",
-      "suite": "base",
-      "turns": [
-        {"role": "user", "content": "Tìm tweet về research reproducibility."},
-        {"role": "user", "content": "Không, tôi muốn tin tức khoa học trên web."}
+        {
+          "role": "user",
+          "content": "Mình muốn đọc bài Heart Rate Variability."
+        },
+        {
+          "role": "user",
+          "content": "Đây là DOI: 10.1161/01.cir.93.5.1043."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ mở link gốc thôi."
+        }
       ],
       "failure_type": "wrong_tool",
-      "expect": {"tool_calls": [{"name": "lookup", "args": {"query": "research reproducibility", "topic": "news"}}]},
-      "metadata": {"skill": "multiturn_tool_switch", "difficulty": "hard", "what_it_tests": "Người dùng chuyển từ tweet sang tin tức web, agent phải chuyển tool từ social_search sang lookup."}
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://doi.org/10.1161/01.cir.93.5.1043"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Context cung cấp DOI của paper 1996 → latest turn yêu cầu mở nguồn gốc, nên phải fetch đúng URL DOI."
+      }
     },
     {
-      "id": "G09_timeline_limit_correction",
+      "id": "MG03_multi_lookup_mortality_title",
       "phase": "B",
-      "suite": "base",
       "turns": [
-        {"role": "user", "content": "Tóm tắt 8 tweet mới nhất của một nhà nghiên cứu."},
-        {"role": "user", "content": "Của Fei-Fei Li, chỉ lấy 4 thôi."}
+        {
+          "role": "user",
+          "content": "Tìm bài về dự đoán tử vong tim mạch sau nhồi máu cơ tim."
+        },
+        {
+          "role": "user",
+          "content": "Tác giả chính là Maria Teresa La Rovere."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ trả về đúng paper đó."
+        }
       ],
       "failure_type": "wrong_arg_value",
-      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "drfeifei", "limit": 4}}]},
-      "metadata": {"skill": "multiturn_limit_adjustment", "difficulty": "hard", "what_it_tests": "Sửa số lượng tweet từ 8 thành 4 và giữ đúng handle nhà nghiên cứu."}
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Baroreflex sensitivity and heart-rate variability in prediction of total cardiac mortality after myocardial infarction"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Multi-turn nhận diện paper 1998 từ mô tả + tác giả rồi lookup đúng title trong dataset."
+      }
     },
     {
-      "id": "G10_clarify_topic_for_social_search",
+      "id": "MG04_multi_lookup_emotional_responding",
       "phase": "B",
-      "suite": "base",
       "turns": [
-        {"role": "user", "content": "Tìm các bài đăng về reproducibility."},
-        {"role": "user", "content": "Ý tôi là reproducibility trong khoa học dữ liệu."}
+        {
+          "role": "user",
+          "content": "Có paper nào về heart rate variability và emotional responding không?"
+        },
+        {
+          "role": "user",
+          "content": "Bài của Bradley Appelhans ấy."
+        },
+        {
+          "role": "user",
+          "content": "Đúng title của paper đó."
+        }
       ],
-      "failure_type": "missing_info",
-      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "text"}}]},
-      "metadata": {"skill": "multiturn_clarify_topic", "difficulty": "medium", "what_it_tests": "Cần dùng clarify nếu query ban đầu quá mơ hồ cho social_search."}
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "Heart Rate Variability as an Index of Regulated Emotional Responding"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Multi-turn ghép mô tả chủ đề + tên tác giả để ra đúng title paper 2006 trong dataset."
+      }
+    },
+    {
+      "id": "MG05_multi_fetch_2014_review_pdf",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Mở bài integrative review về heart's anatomy và HRV."
+        },
+        {
+          "role": "user",
+          "content": "Bài của Fred Shaffer năm 2014."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ lấy bản PDF thôi."
+        }
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://www.frontiersin.org/articles/10.3389/fpsyg.2014.01040/pdf"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Multi-turn truy ngược paper 2014 trong dataset rồi fetch đúng PDF URL thay vì lookup lại."
+      }
     }
   ]
 }
