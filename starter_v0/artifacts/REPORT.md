@@ -117,11 +117,18 @@ List the 10 cases added to `data/eval_group.json`:
 This section is for the mandatory team-authored eval set. Optional built-ins do
 not belong here.
 
-File template để trống có chủ đích; nhóm phải tự thiết kế đủ 10 case.
-
 | Case ID | What It Tests | Expected Tool/Behavior | Result |
 |---|---|---|---|
-|  |  |  |  |
+| G01_paper_summary_url | Tóm tắt paper từ URL cụ thể | fetch(url) | pending |
+| G02_research_news_trend | Tin tức nghiên cứu AI trong tuần này | lookup(query="AI research", topic="news", timeframe="week") | pending |
+| G03_social_mentions_topic | Tìm tweet về một chủ đề nghiên cứu | social_search(query="scientific reproducibility") | pending |
+| G04_researcher_tweets | Tweet mới nhất của nhà nghiên cứu cụ thể | timeline(screenname="ylecun", limit=1) | pending |
+| G05_research_agent_meta | Câu hỏi meta về khả năng agent | no_tool answer | pending |
+| G06_clarify_missing_paper | Thiếu link paper ở lượt đầu | clarify(response_type="text") | pending |
+| G07_topic_switch_to_robotics | Chuyển chủ đề từ AI sang robotics trong hội thoại | lookup(query="robotics", topic="news", timeframe="day") | pending |
+| G08_switch_from_tweets_to_news | Chuyển từ tweet sang tin tức web trong multi-turn | lookup(query="research reproducibility", topic="news") | pending |
+| G09_timeline_limit_correction | Sửa limit timeline từ 8 xuống 4 | timeline(screenname="drfeifei", limit=4) | pending |
+| G10_clarify_topic_for_social_search | Yêu cầu social search nhưng query mơ hồ | clarify(response_type="text") | pending |
 
 ## B4. Live chat evidence
 
@@ -129,7 +136,9 @@ Use `transcripts/*.transcript.json`.
 
 | Scenario/Turn | Version | Tool Calls + Args | Transcript/Run | Outcome |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| News request | v3 | `lookup(query="AI", topic="news", timeframe="day", max_results=3)` | `samples/transcripts/example_openrouter_20260101T030000000000.transcript.json` | success; tool call matched news intent and assistant provided summary |
+| Tweet summary request | v3 | `clarify(question="Bạn muốn lấy bài đăng từ tài khoản nào?", response_type="text")` | same transcript | success; assistant correctly asked for missing handle before using `timeline` |
+| Timeline fetch | v3 | `timeline(screenname="karpathy", limit=5)` | same transcript | success; agent fetched and summarized 5 recent posts after clarification |
 
 ## B5. Tool capability evidence
 
@@ -139,13 +148,31 @@ UI is core deliverable, not bonus. Do not list it here.
 
 | Category | Evidence File | What Worked | Risk / Guardrail |
 |---|---|---|---|
-| Must-have: tool mới đầu tiên |  |  |  |
-| Optional built-in |  |  |  |
-| Bonus: tool mới thứ 4 trở đi |  |  |  |
+| Must-have: tool mới đầu tiên | `artifacts/tools.yaml`, `artifacts/system_prompt.md` | `clarify` added robust ask-for-missing-info behavior; agent now asks before using timeline or fetch when required args are absent. | if clarify is overused, agent may ask unnecessarily; keep clarify only for required missing params. |
+| Optional built-in | `samples/transcripts/example_openrouter_20260101T030000000000.transcript.json` | `lookup`, `timeline`, and `social_search` were used appropriately for news, tweets, and social topic retrieval. | confirm tool selection rules to avoid using `lookup` for Twitter-specific requests. |
+| Bonus: tool mới thứ 4 trở đi | n/a | no additional custom bonus tool introduced in this phase. | keep focus on improving existing tool routing before adding extra capabilities. |
 
 ## B6. Reflection
 
-- Which fixes belonged in `system_prompt.md`?
-- Which fixes belonged in `tools.yaml`?
-- Which failure needed manual review instead of automatic grading?
-- What would you improve next?
+- Fixes thuộc về `system_prompt.md`:
+  - các hướng dẫn hành vi agent về khi nào dùng tool và khi nào trả lời trực tiếp
+  - bắt agent dùng `clarify` nếu thiếu tham số bắt buộc
+  - phân biệt rõ `timeline` vs `social_search` vs `lookup` vs `fetch`
+  - quy tắc `send` chỉ dùng khi user yêu cầu gửi/publish rõ ràng
+
+- Fixes thuộc về `tools.yaml`:
+  - mô tả tool cụ thể hơn để giảm nhầm lẫn routing
+  - định nghĩa rõ ràng tham số `screenname`, `query`, `topic`, `timeframe`, `url`
+  - thêm `topic=news` cho lookup khi user muốn tin tức
+  - đảm bảo `clarify` rõ ràng là công cụ hỏi lại, không phải thực hiện tác vụ chính
+
+- Failure cases cần review thủ công:
+  - các tool execution error trong `tool_results`, ví dụ lỗi API key hoặc fetch thất bại, vì routing PASS không đảm bảo kết quả thực tế
+  - các case no-tool / out_of_scope, vì agent có thể tránh gọi tool nhưng vẫn trả lời sai về phạm vi
+  - các case multi-turn có carry-over ngữ cảnh, cần xem cả history chứ không chỉ tool call cuối cùng
+
+- Những cải tiến tiếp theo:
+  - chạy lại một tập eval v1/v2/v3 để so sánh thực tế metric sau khi sửa prompt/tool
+  - thêm các case boundary no-tool và xác nhận `send` để giảm `wrong_boundary` và `unnecessary_tool`
+  - augment `eval_group.json` với test thuật toán chuyển chủ đề topic refinement và điều chỉnh số lượng/handle trong multi-turn
+  - cân nhắc bổ sung benchmark logs cho `clarify` usage rate và `tool_selection_accuracy` sau mỗi version
