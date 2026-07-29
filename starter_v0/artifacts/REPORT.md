@@ -9,7 +9,7 @@
 
 - Team:
 - Members:
-- Provider/model:
+- Provider/model
 
 ---
 
@@ -148,7 +148,7 @@ UI is core deliverable, not bonus. Do not list it here.
 
   - các tool execution error trong `tool_results`, ví dụ lỗi API key hoặc fetch thất bại, vì routing PASS không đảm bảo kết quả thực tế
   - các case no-tool / out_of_scope, vì agent có thể tránh gọi tool nhưng vẫn trả lời sai về phạm vi
-  - các case multi-turn có carry-over ngữ cảnh, cần xem cả history chứ không chỉ tool call cuối cùng
+  - các case multi-turn có carry-over ngữ cảnh, cần xem cả history chứ không chỉ tool call cuối cùng.
 - Những cải tiến tiếp theo:
 
   - chạy lại một tập eval v1/v2/v3 để so sánh thực tế metric sau khi sửa prompt/tool
