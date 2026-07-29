@@ -1,6 +1,7 @@
 # Day 04 Lab v2 Report — Research Agent
 
 > File này gồm 2 phần, deadline khác nhau:
+>
 > - **PHẦN A — Giới thiệu agent**: ngắn gọn 1 trang để team khác hiểu nhanh agent có tool gì, làm được gì, thử bằng câu hỏi nào. Xong trước 11:30 để làm tài liệu phụ trợ khi demo.
 > - **PHẦN B — Chi tiết / Bằng chứng**: bảng đầy đủ (v0–v3, failure, eval, chat) dựa trên log thật. Có thể hoàn thiện sau buổi debate để nộp bài.
 
@@ -17,6 +18,7 @@
 ## A1. Agent này làm được gì
 
 Agent này là một research assistant chuyên tìm và tổng hợp thông tin. Nó có thể:
+
 - truy vấn tweet của một tài khoản cụ thể bằng `timeline`
 - tìm thảo luận về chủ đề trên mạng xã hội bằng `social_search`
 - tra cứu tin tức/web chung bằng `lookup`
@@ -32,15 +34,15 @@ Agent này là một research assistant chuyên tìm và tổng hợp thông tin
 
 ## A2. Tool agent có
 
-| Tên tool | Làm được gì | Tool mới nhóm thêm? |
-|---|---|---|
-| clarify | hỏi lại người dùng khi thiếu thông tin trước khi gọi tool | không |
-| timeline | lấy tweet gần nhất từ một Twitter handle cụ thể | không |
-| social_search | tìm bài viết/tweet theo chủ đề hoặc từ khóa | không |
-| lookup | tra cứu thông tin chung hoặc tin tức trên web | không |
-| fetch | đọc nội dung của một URL cụ thể | không |
-| format | định dạng dữ liệu có sẵn thành bài viết/summary | không |
-| send | gửi hoặc publish nội dung khi user yêu cầu | không |
+| Tên tool     | Làm được gì                                                    | Tool mới nhóm thêm? |
+| ------------- | ------------------------------------------------------------------- | ---------------------- |
+| clarify       | hỏi lại người dùng khi thiếu thông tin trước khi gọi tool | không                 |
+| timeline      | lấy tweet gần nhất từ một Twitter handle cụ thể              | không                 |
+| social_search | tìm bài viết/tweet theo chủ đề hoặc từ khóa                | không                 |
+| lookup        | tra cứu thông tin chung hoặc tin tức trên web                  | không                 |
+| fetch         | đọc nội dung của một URL cụ thể                              | không                 |
+| format        | định dạng dữ liệu có sẵn thành bài viết/summary           | không                 |
+| send          | gửi hoặc publish nội dung khi user yêu cầu                     | không                 |
 
 ## A3. Câu hỏi mẫu để thử
 
@@ -52,13 +54,13 @@ Agent này là một research assistant chuyên tìm và tổng hợp thông tin
 
 ## A4. Kịch bản demo đã rehearse
 
-| Scenario | Tool trace cần thấy | Câu chuyện cải thiện version | Fallback run/transcript |
-|---|---|---|---|
-| Tìm tweet của người nổi tiếng | `clarify` nếu thiếu handle, sau đó `timeline(screenname=...)` | v1: đúng tool `timeline` thay vì `social_search` | R01/R10 |
-| Tìm thảo luận theo chủ đề | `social_search(query=..., search_type=Latest)` | v1: phân biệt `social_search` và `timeline` | R02/R07 |
-| Tìm tin tức hôm nay | `lookup(query=..., topic=news, timeframe=day)` | v2: gán timeframe chính xác cho "hôm nay" | R03/R06 |
-| Đọc URL cụ thể | `clarify` nếu thiếu url, sau đó `fetch(url=...)` | v2: clarify khi thiếu tham số bắt buộc | R04/R11 |
-| Trả lời không cần tool | không gọi tool nếu user chỉ hỏi nội dung chung | v3: boundary no-tool đúng | R08/R14 |
+| Scenario                            | Tool trace cần thấy                                                 | Câu chuyện cải thiện version                       | Fallback run/transcript |
+| ----------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------ | ----------------------- |
+| Tìm tweet của người nổi tiếng | `clarify` nếu thiếu handle, sau đó `timeline(screenname=...)` | v1: đúng tool`timeline` thay vì `social_search` | R01/R10                 |
+| Tìm thảo luận theo chủ đề     | `social_search(query=..., search_type=Latest)`                      | v1: phân biệt`social_search` và `timeline`      | R02/R07                 |
+| Tìm tin tức hôm nay              | `lookup(query=..., topic=news, timeframe=day)`                      | v2: gán timeframe chính xác cho "hôm nay"          | R03/R06                 |
+| Đọc URL cụ thể                  | `clarify` nếu thiếu url, sau đó `fetch(url=...)`              | v2: clarify khi thiếu tham số bắt buộc             | R04/R11                 |
+| Trả lời không cần tool          | không gọi tool nếu user chỉ hỏi nội dung chung                  | v3: boundary no-tool đúng                            | R08/R14                 |
 
 ---
 
@@ -70,51 +72,51 @@ Agent này là một research assistant chuyên tìm và tổng hợp thông tin
 
 The workspace currently contains one concrete v0 run with measurable results: `runs/v0_B_base_openai_20260729T093024057807.json`. No real v1/v2/v3 run files were present in the workspace, so the v1-v3 rows below are target values expected after the prompt/tool changes rather than observed numbers.
 
-| Version | Source | Prompt/tool change | Case accuracy | Tool routing accuracy | Argument accuracy | Notes |
-|---|---|---|---:|---:|---:|---|
-| v0 | `runs/v0_B_base_openai_20260729T093024057807.json` | baseline prompt + vague tool descriptions | 0.70 | 0.75 | 0.70 | 14/20 passed; main issues were out-of-scope handling and missing clarification |
-| v1 | target (no run log yet) | clearer tool-role routing in `system_prompt.md` and `tools.yaml` | 0.80+ | 0.85+ | 0.80+ | expected to reduce wrong-tool routing errors |
-| v2 | target (no run log yet) | stronger `clarify` rules and clearer paper-summary schema | 0.85+ | 0.90+ | 0.85+ | expected to reduce wrong-argument and missing-info failures |
-| v3 | target (no run log yet) | no-tool boundary rules and explicit `send`/publish guardrails | 0.90+ | 0.95+ | 0.90+ | expected to reduce boundary and unnecessary-tool errors |
+| Version | Source                                               | Prompt/tool change                                                  | Case accuracy | Tool routing accuracy | Argument accuracy | Notes                                                                          |
+| ------- | ---------------------------------------------------- | ------------------------------------------------------------------- | ------------: | --------------------: | ----------------: | ------------------------------------------------------------------------------ |
+| v0      | `runs/v0_B_base_openai_20260729T093024057807.json` | baseline prompt + vague tool descriptions                           |          0.70 |                  0.75 |              0.70 | 14/20 passed; main issues were out-of-scope handling and missing clarification |
+| v1      | target (no run log yet)                              | clearer tool-role routing in`system_prompt.md` and `tools.yaml` |         0.80+ |                 0.85+ |             0.80+ | expected to reduce wrong-tool routing errors                                   |
+| v2      | target (no run log yet)                              | stronger`clarify` rules and clearer paper-summary schema          |         0.85+ |                 0.90+ |             0.85+ | expected to reduce wrong-argument and missing-info failures                    |
+| v3      | target (no run log yet)                              | no-tool boundary rules and explicit`send`/publish guardrails      |         0.90+ |                 0.95+ |             0.90+ | expected to reduce boundary and unnecessary-tool errors                        |
 
 ## B2. Failure analysis
 
 Based on the observed v0 run, the main failure modes were:
 
-| Category | Evidence from v0 log | Root cause | Recommended fix |
-|---|---|---|---|
-| wrong_tool / routing | `observed_mismatch_counts.missing_tool_call = 3` | tool descriptions and routing rules were too vague, so the agent sometimes chose the wrong tool or missed the expected tool call | tighten routing rules in `system_prompt.md` and make tool descriptions more concrete |
-| wrong_arg_value | `observed_mismatch_counts.wrong_arg_value = 1` | parameter extraction was not explicit enough for values such as `limit`, `timeframe`, and `search_type` | define defaults and expected arg mapping more clearly in `tools.yaml` |
-| missing_info | `failure_counts.missing_info = 2` | the agent did not consistently ask for missing handle/URL before acting | require `clarify` when required info is absent |
-| wrong_boundary | `failure_counts.wrong_boundary = 1` | the agent did not consistently distinguish between a publish/send action and a normal information request | add explicit boundary rules for `send` and no-tool answers |
-| out_of_scope | `failure_counts.out_of_scope = 2` | the agent sometimes attempted tool use for requests that should be answered directly | add a no-tool fallback rule for out-of-scope requests |
+| Category             | Evidence from v0 log                               | Root cause                                                                                                                       | Recommended fix                                                                       |
+| -------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| wrong_tool / routing | `observed_mismatch_counts.missing_tool_call = 3` | tool descriptions and routing rules were too vague, so the agent sometimes chose the wrong tool or missed the expected tool call | tighten routing rules in`system_prompt.md` and make tool descriptions more concrete |
+| wrong_arg_value      | `observed_mismatch_counts.wrong_arg_value = 1`   | parameter extraction was not explicit enough for values such as`limit`, `timeframe`, and `search_type`                     | define defaults and expected arg mapping more clearly in`tools.yaml`                |
+| missing_info         | `failure_counts.missing_info = 2`                | the agent did not consistently ask for missing handle/URL before acting                                                          | require`clarify` when required info is absent                                       |
+| wrong_boundary       | `failure_counts.wrong_boundary = 1`              | the agent did not consistently distinguish between a publish/send action and a normal information request                        | add explicit boundary rules for`send` and no-tool answers                           |
+| out_of_scope         | `failure_counts.out_of_scope = 2`                | the agent sometimes attempted tool use for requests that should be answered directly                                             | add a no-tool fallback rule for out-of-scope requests                                 |
 
 ## B3. Team eval cases
 
 The 10 team-authored cases were added in `data/eval_group.json` and are grouped into single-turn and multi-turn scenarios for research-summary style tasks.
 
-| Case ID | What It Tests | Expected Tool/Behavior | Result |
-|---|---|---|---|
-| G01_paper_summary_url | summarize a paper from a URL | `paper_summarizer(query=<url>, summary_format=brief)` | pending / not run yet |
-| G02_research_news_trend | news lookup for AI research this week | `lookup(query="AI research", topic="news", timeframe="week")` | pending / not run yet |
-| G03_social_mentions_topic | topic-based social search | `social_search(query="scientific reproducibility")` | pending / not run yet |
-| G04_researcher_tweets | tweet retrieval for a named researcher | `timeline(screenname="ylecun", limit=1)` | pending / not run yet |
-| G05_research_agent_meta | meta-question about the agent | no tool; direct answer | pending / not run yet |
-| G06_clarify_missing_paper | missing paper URL in multi-turn flow | `clarify` first, then `paper_summarizer` | pending / not run yet |
-| G07_topic_switch_to_robotics | topic change from AI to robotics in conversation | `lookup(query="robotics", topic="news", timeframe="day")` | pending / not run yet |
-| G08_switch_from_tweets_to_news | switch from tweet search to news search | `lookup(query="research reproducibility", topic="news")` | pending / not run yet |
-| G09_timeline_limit_correction | adjust tweet count after clarification | `timeline(screenname="drfeifei", limit=4)` | pending / not run yet |
-| G10_clarify_topic_for_social_search | ambiguous topic for social search | `clarify` before tool use | pending / not run yet |
+| Case ID                             | What It Tests                                    | Expected Tool/Behavior                                          | Result                |
+| ----------------------------------- | ------------------------------------------------ | --------------------------------------------------------------- | --------------------- |
+| G01_paper_summary_url               | summarize a paper from a URL                     | `paper_summarizer(query=<url>, summary_format=brief)`         | pending / not run yet |
+| G02_research_news_trend             | news lookup for AI research this week            | `lookup(query="AI research", topic="news", timeframe="week")` | pending / not run yet |
+| G03_social_mentions_topic           | topic-based social search                        | `social_search(query="scientific reproducibility")`           | pending / not run yet |
+| G04_researcher_tweets               | tweet retrieval for a named researcher           | `timeline(screenname="ylecun", limit=1)`                      | pending / not run yet |
+| G05_research_agent_meta             | meta-question about the agent                    | no tool; direct answer                                          | pending / not run yet |
+| G06_clarify_missing_paper           | missing paper URL in multi-turn flow             | `clarify` first, then `paper_summarizer`                    | pending / not run yet |
+| G07_topic_switch_to_robotics        | topic change from AI to robotics in conversation | `lookup(query="robotics", topic="news", timeframe="day")`     | pending / not run yet |
+| G08_switch_from_tweets_to_news      | switch from tweet search to news search          | `lookup(query="research reproducibility", topic="news")`      | pending / not run yet |
+| G09_timeline_limit_correction       | adjust tweet count after clarification           | `timeline(screenname="drfeifei", limit=4)`                    | pending / not run yet |
+| G10_clarify_topic_for_social_search | ambiguous topic for social search                | `clarify` before tool use                                     | pending / not run yet |
 
 ## B4. Live chat evidence
 
 Use `transcripts/*.transcript.json`.
 
-| Scenario/Turn | Version | Tool Calls + Args | Transcript/Run | Outcome |
-|---|---|---|---|---|
-| News request | v3 | `lookup(query="AI", topic="news", timeframe="day", max_results=3)` | `samples/transcripts/example_openrouter_20260101T030000000000.transcript.json` | success; tool call matched news intent and assistant provided summary |
-| Tweet summary request | v3 | `clarify(question="Bạn muốn lấy bài đăng từ tài khoản nào?", response_type="text")` | same transcript | success; assistant correctly asked for missing handle before using `timeline` |
-| Timeline fetch | v3 | `timeline(screenname="karpathy", limit=5)` | same transcript | success; agent fetched and summarized 5 recent posts after clarification |
+| Scenario/Turn         | Version | Tool Calls + Args                                                                               | Transcript/Run                                                                   | Outcome                                                                        |
+| --------------------- | ------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| News request          | v3      | `lookup(query="AI", topic="news", timeframe="day", max_results=3)`                            | `samples/transcripts/example_openrouter_20260101T030000000000.transcript.json` | success; tool call matched news intent and assistant provided summary          |
+| Tweet summary request | v3      | `clarify(question="Bạn muốn lấy bài đăng từ tài khoản nào?", response_type="text")` | same transcript                                                                  | success; assistant correctly asked for missing handle before using`timeline` |
+| Timeline fetch        | v3      | `timeline(screenname="karpathy", limit=5)`                                                    | same transcript                                                                  | success; agent fetched and summarized 5 recent posts after clarification       |
 
 ## B5. Tool capability evidence
 
@@ -122,32 +124,33 @@ Phân loại rõ tool mới bắt buộc, optional built-in và tool đủ đi�
 
 UI is core deliverable, not bonus. Do not list it here.
 
-| Category | Evidence File | What Worked | Risk / Guardrail |
-|---|---|---|---|
-| Must-have: tool mới đầu tiên | `artifacts/tools.yaml`, `artifacts/system_prompt.md` | `clarify` added robust ask-for-missing-info behavior; agent now asks before using timeline or fetch when required args are absent. | if clarify is overused, agent may ask unnecessarily; keep clarify only for required missing params. |
-| Optional built-in | `samples/transcripts/example_openrouter_20260101T030000000000.transcript.json` | `lookup`, `timeline`, and `social_search` were used appropriately for news, tweets, and social topic retrieval. | confirm tool selection rules to avoid using `lookup` for Twitter-specific requests. |
-| Bonus: tool mới thứ 4 trở đi | n/a | no additional custom bonus tool introduced in this phase. | keep focus on improving existing tool routing before adding extra capabilities. |
+| Category                         | Evidence File                                                                    | What Worked                                                                                                                          | Risk / Guardrail                                                                                    |
+| -------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| Must-have: tool mới đầu tiên | `artifacts/tools.yaml`, `artifacts/system_prompt.md`                         | `clarify` added robust ask-for-missing-info behavior; agent now asks before using timeline or fetch when required args are absent. | if clarify is overused, agent may ask unnecessarily; keep clarify only for required missing params. |
+| Optional built-in                | `samples/transcripts/example_openrouter_20260101T030000000000.transcript.json` | `lookup`, `timeline`, and `social_search` were used appropriately for news, tweets, and social topic retrieval.                | confirm tool selection rules to avoid using`lookup` for Twitter-specific requests.                |
+| Bonus: tool mới thứ 4 trở đi | n/a                                                                              | no additional custom bonus tool introduced in this phase.                                                                            | keep focus on improving existing tool routing before adding extra capabilities.                     |
 
 ## B6. Reflection
 
 - Fixes thuộc về `system_prompt.md`:
+
   - các hướng dẫn hành vi agent về khi nào dùng tool và khi nào trả lời trực tiếp
   - bắt agent dùng `clarify` nếu thiếu tham số bắt buộc
   - phân biệt rõ `timeline` vs `social_search` vs `lookup` vs `fetch`
   - quy tắc `send` chỉ dùng khi user yêu cầu gửi/publish rõ ràng
-
 - Fixes thuộc về `tools.yaml`:
+
   - mô tả tool cụ thể hơn để giảm nhầm lẫn routing
   - định nghĩa rõ ràng tham số `screenname`, `query`, `topic`, `timeframe`, `url`
   - thêm `topic=news` cho lookup khi user muốn tin tức
   - đảm bảo `clarify` rõ ràng là công cụ hỏi lại, không phải thực hiện tác vụ chính
-
 - Failure cases cần review thủ công:
+
   - các tool execution error trong `tool_results`, ví dụ lỗi API key hoặc fetch thất bại, vì routing PASS không đảm bảo kết quả thực tế
   - các case no-tool / out_of_scope, vì agent có thể tránh gọi tool nhưng vẫn trả lời sai về phạm vi
   - các case multi-turn có carry-over ngữ cảnh, cần xem cả history chứ không chỉ tool call cuối cùng
-
 - Những cải tiến tiếp theo:
+
   - chạy lại một tập eval v1/v2/v3 để so sánh thực tế metric sau khi sửa prompt/tool
   - thêm các case boundary no-tool và xác nhận `send` để giảm `wrong_boundary` và `unnecessary_tool`
   - augment `eval_group.json` với test thuật toán chuyển chủ đề topic refinement và điều chỉnh số lượng/handle trong multi-turn
