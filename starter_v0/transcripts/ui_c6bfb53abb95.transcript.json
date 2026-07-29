@@ -1,0 +1,49 @@
+{
+  "session_id": "c6bfb53abb95",
+  "title": "cho tôi thời tiết hà nội hôm nay",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "version": "v2-pending",
+  "artifact_version": "v2-pending+pa6cca87e8883+ta7475a616ff9",
+  "prompt_hash": "a6cca87e88838084dfdf702c89845c9be9de66425a105fff912c22c51befa6c3",
+  "tools_hash": "a7475a616ff9b29dac939f562cf02cb4582bb75a2465dba5162c193d5743098c",
+  "created_at": "2026-07-29T11:41:39",
+  "updated_at": "2026-07-29T11:42:36",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-07-29T11:41:39",
+      "user": "cho tôi thời tiết hà nội hôm nay",
+      "status": "answered",
+      "assistant_text": "Tôi không thể cung cấp thông tin thời tiết trực tiếp. Bạn có thể kiểm tra thời tiết Hà Nội hôm nay qua các trang web hoặc ứng dụng thời tiết như Weather.com, AccuWeather hoặc ứng dụng thời tiết trên điện thoại của bạn.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "Tôi không thể cung cấp thông tin thời tiết trực tiếp. Bạn có thể kiểm tra thời tiết Hà Nội hôm nay qua các trang web hoặc ứng dụng thời tiết như Weather.com, AccuWeather hoặc ứng dụng thời tiết trên điện thoại của bạn.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [],
+      "ended_at": "2026-07-29T11:41:42"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-07-29T11:42:30",
+      "user": "làm một bài thơ lục bát về hà nội mà mang tính research xem nào",
+      "status": "answered",
+      "assistant_text": "Dưới đây là bài thơ lục bát về Hà Nội với tính chất nghiên cứu:\n\nHà Nội ơi, phố phường tấp nập,  \nNơi lịch sử, văn hóa đậm đà.  \n\nNgàn năm trước, Thăng Long rực rỡ,  \nDi sản xưa, vẫn mãi còn đây.  \n\nHồ Gươm xanh, gương soi bóng nước,  \nNgắm trăng vàng, lòng thấy bình yên.  \n\nPhố cổ xưa, ngõ nhỏ rêu phong,  \nẨm thực ngon, phở, bún chả, say.  \n\nNghiên cứu mãi, văn hóa đa dạng,  \nHà Nội ơi, tình yêu không phai.  \n\nMỗi bước đi, là một trang sử,  \nKhám phá thêm, ta lại yêu thêm.  \n\nHy vọng bài thơ này mang lại cảm hứng cho bạn!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "Dưới đây là bài thơ lục bát về Hà Nội với tính chất nghiên cứu:\n\nHà Nội ơi, phố phường tấp nập,  \nNơi lịch sử, văn hóa đậm đà.  \n\nNgàn năm trước, Thăng Long rực rỡ,  \nDi sản xưa, vẫn mãi còn đây.  \n\nHồ Gươm xanh, gương soi bóng nước,  \nNgắm trăng vàng, lòng thấy bình yên.  \n\nPhố cổ xưa, ngõ nhỏ rêu phong,  \nẨm thực ngon, phở, bún chả, say.  \n\nNghiên cứu mãi, văn hóa đa dạng,  \nHà Nội ơi, tình yêu không phai.  \n\nMỗi bước đi, là một trang sử,  \nKhám phá thêm, ta lại yêu thêm.  \n\nHy vọng bài thơ này mang lại cảm hứng cho bạn!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [],
+      "ended_at": "2026-07-29T11:42:36"
+    }
+  ],
+  "memories": []
+}
