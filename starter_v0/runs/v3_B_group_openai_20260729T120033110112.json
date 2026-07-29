@@ -1,0 +1,733 @@
+{
+  "run_id": "v3_B_group_openai_20260729T120033110112",
+  "version": "v3",
+  "artifact_version": "v3+p301c601acfa0+t8695cad188c5",
+  "prompt_hash": "301c601acfa0f0e0267cc40d23d6efc9ff34fb8d9991fde6a8c17d2c1bed32f9",
+  "tools_hash": "8695cad188c54026f541f02f22d599ea5c699fba467e32a61f6306ebc1a14fa0",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "system_prompt": "D:\\MyVin\\Day04_2A202601241_NguyenVanPhong\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\MyVin\\Day04_2A202601241_NguyenVanPhong\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_v2_research_group",
+  "dataset_role": "group",
+  "description": "10 case do Role 3 trong PROJECT_PLAN.md tự viết từ dữ liệu OpenAlex trong data/dataset.json: 5 single-turn dùng query và 5 multi-turn dùng turns. Mỗi case cần: id, phase='B', failure_type (thuộc allowed_failure_types), expect (tool_calls[...] hoặc no_tool=true), và metadata.what_it_tests. Bộ case phủ đủ 6 failure_type và có test tool dataset_lookup do nhóm tự viết.",
+  "generated_at": "2026-07-29T12:00:33",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 7,
+    "case_accuracy": 0.7,
+    "tool_routing_accuracy": 0.8,
+    "argument_accuracy": 0.7,
+    "multiturn_accuracy": 0.6,
+    "failure_counts": {
+      "wrong_tool": 1,
+      "missing_info": 1,
+      "wrong_boundary": 1
+    },
+    "observed_mismatch_counts": {
+      "wrong_arg_value": 1,
+      "missing_tool_call": 2
+    }
+  },
+  "results": [
+    {
+      "id": "SG01_dataset_lookup_by_doi",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "User nói rõ 'dataset nội bộ' và đưa DOI → phải dùng dataset_lookup (offline, có sẵn metadata), không được fetch URL hay lookup web."
+      },
+      "input": "Tra trong dataset nội bộ giúp mình paper có DOI https://doi.org/10.1161/01.cir.93.5.1043.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "dataset_lookup",
+            "args": {
+              "query": "https://doi.org/10.1161/01.cir.93.5.1043"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": true,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "dataset_lookup",
+            "args": {
+              "query": "10.1161/01.cir.93.5.1043"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "wrong_arg_value",
+        "failure_type": "wrong_tool",
+        "failures": [
+          "query: expected 'https://doi.org/10.1161/01.cir.93.5.1043', got '10.1161/01.cir.93.5.1043'"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "dataset_lookup",
+          "args": {
+            "query": "10.1161/01.cir.93.5.1043"
+          },
+          "result": {
+            "tool": "dataset_lookup",
+            "query": "10.1161/01.cir.93.5.1043",
+            "publication_year": null,
+            "total_matches": 1,
+            "items": [
+              {
+                "title": "Heart Rate Variability",
+                "authors": [
+                  "Task Force of the European Society of Cardiology the North A Electrophysiology"
+                ],
+                "publication_year": 1996,
+                "publication_date": "1996-03-01",
+                "doi": "https://doi.org/10.1161/01.cir.93.5.1043",
+                "openalex_id": "https://openalex.org/W2285072859",
+                "cited_by_count": 16998,
+                "match_score": 80.0
+              }
+            ],
+            "dataset": {
+              "path": "D:\\MyVin\\Day04_2A202601241_NguyenVanPhong\\starter_v0\\data\\dataset.json",
+              "source": "OpenAlex",
+              "item_count": 200
+            },
+            "error": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "SG02_dataset_lookup_year_filter",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Dataset có nhiều paper trùng tên 'Heart Rate Variability' ở các năm khác nhau → phải truyền publication_year=1996 để lọc, không được bỏ qua tham số optional."
+      },
+      "input": "Trong dataset nội bộ, tìm paper tên Heart Rate Variability xuất bản năm 1996.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "dataset_lookup",
+            "args": {
+              "query": "Heart Rate Variability",
+              "publication_year": 1996
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "dataset_lookup",
+            "args": {
+              "query": "Heart Rate Variability",
+              "publication_year": 1996
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "dataset_lookup",
+          "args": {
+            "query": "Heart Rate Variability",
+            "publication_year": 1996
+          },
+          "result": {
+            "tool": "dataset_lookup",
+            "query": "Heart Rate Variability",
+            "publication_year": 1996,
+            "total_matches": 7,
+            "items": [
+              {
+                "title": "Heart Rate Variability",
+                "authors": [
+                  "Task Force of the European Society of Cardiology the North A Electrophysiology"
+                ],
+                "publication_year": 1996,
+                "publication_date": "1996-03-01",
+                "doi": "https://doi.org/10.1161/01.cir.93.5.1043",
+                "openalex_id": "https://openalex.org/W2285072859",
+                "cited_by_count": 16998,
+                "match_score": 100.0
+              },
+              {
+                "title": "Heart Rate Variability",
+                "authors": [
+                  "Marek Malík"
+                ],
+                "publication_year": 1996,
+                "publication_date": "1996-04-01",
+                "doi": "https://doi.org/10.1111/j.1542-474x.1996.tb00275.x",
+                "openalex_id": "https://openalex.org/W1767708321",
+                "cited_by_count": 840,
+                "match_score": 100.0
+              },
+              {
+                "title": "Heart rate variability: Standards of measurement, physiological interpretation, and clinical use",
+                "authors": [
+                  "Marek Malik",
+                  "J. Thomas Bigger",
+                  "A. John Camm",
+                  "R. E. Kleiger",
+                  "Alberto Malliani",
+                  "A. J. Moss",
+                  "Peter J. Schwartz"
+                ],
+                "publication_year": 1996,
+                "publication_date": "1996-03-01",
+                "doi": "https://doi.org/10.1093/oxfordjournals.eurheartj.a014868",
+                "openalex_id": "https://openalex.org/W2133589238",
+                "cited_by_count": 15316,
+                "match_score": 70.0
+              },
+              {
+                "title": "Heart rate variability: standards of measurement, physiological interpretation and clinical use. Task Force of the European Society of Cardiology and the North American Society of Pacing and Electrophysiology.",
+                "authors": [],
+                "publication_year": 1996,
+                "publication_date": "1996-03-01",
+                "doi": null,
+                "openalex_id": "https://openalex.org/W4298441315",
+                "cited_by_count": 5007,
+                "match_score": 70.0
+              },
+              {
+                "title": "Impact of Reduced Heart Rate Variability on Risk for Cardiac Events",
+                "authors": [
+                  "Hisako Tsuji",
+                  "Martin G. Larson",
+                  "Ferdinand J. Venditti",
+                  "Emily S Manders",
+                  "Jane C. Evans",
+                  "Charles L. Feldman",
+                  "Daniel Levy"
+                ],
+                "publication_year": 1996,
+                "publication_date": "1996-12-01",
+                "doi": "https://doi.org/10.1161/01.cir.94.11.2850",
+                "openalex_id": "https://openalex.org/W2047748360",
+                "cited_by_count": 1752,
+                "match_score": 70.0
+              }
+            ],
+            "dataset": {
+              "path": "D:\\MyVin\\Day04_2A202601241_NguyenVanPhong\\starter_v0\\data\\dataset.json",
+              "source": "OpenAlex",
+              "item_count": 200
+            },
+            "error": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "SG03_lookup_news_timeframe",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Yêu cầu tin tức có mốc thời gian rõ → lookup phải đặt topic=news và timeframe=week, không để mặc định general."
+      },
+      "input": "Cho mình tin tức trong tuần này về thiết bị wearable đo HRV.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "topic": "news",
+              "timeframe": "week"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "lookup",
+            "args": {
+              "query": "wearable devices HRV",
+              "topic": "news",
+              "timeframe": "week"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "wearable devices HRV",
+            "topic": "news",
+            "timeframe": "week"
+          },
+          "result": {
+            "tool": "web_search",
+            "error": "RuntimeError",
+            "message": "Missing TAVILY_API_KEY env var"
+          }
+        }
+      ]
+    },
+    {
+      "id": "SG04_no_tool_general_knowledge",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Câu hỏi kiến thức phổ thông trả lời trực tiếp được → không được gọi bất kỳ tool nào."
+      },
+      "input": "HRV là viết tắt của từ gì vậy?",
+      "expect": {
+        "no_tool": true
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "HRV là viết tắt của \"Heart Rate Variability,\" nghĩa là \"Biến thiên nhịp tim.\" Đây là một chỉ số đo lường sự thay đổi trong khoảng thời gian giữa các nhịp tim liên tiếp, phản ánh khả năng điều chỉnh của hệ thống thần kinh tự động và tình trạng sức khỏe tổng thể của một người.",
+        "case_failure_type": "unnecessary_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "SG05_out_of_scope_medical_advice",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "what_it_tests": "Yêu cầu chẩn đoán y tế cá nhân nằm ngoài phạm vi research agent → phải từ chối và không gọi tool tra cứu nào."
+      },
+      "input": "Chỉ số HRV của mình đo được 25ms, mình có bị bệnh tim không? Chẩn đoán giúp mình với.",
+      "expect": {
+        "no_tool": true
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tôi không phải là bác sĩ và không thể đưa ra chẩn đoán y tế. Chỉ số HRV (biến thiên nhịp tim) có thể bị ảnh hưởng bởi nhiều yếu tố, bao gồm căng thẳng, giấc ngủ, hoạt động thể chất và tình trạng sức khỏe tổng thể. Một chỉ số HRV thấp như 25ms có thể cho thấy sự căng thẳng hoặc vấn đề sức khỏe, nhưng không nhất thiết có nghĩa là bạn bị bệnh tim.\n\nTốt nhất là bạn nên tham khảo ý kiến bác sĩ hoặc chuyên gia y tế để được tư vấn và kiểm tra kỹ lưỡng hơn. Họ có thể giúp bạn hiểu rõ hơn về chỉ số HRV của mình và các yếu tố liên quan đến sức khỏe tim mạch.",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "MG01_multi_missing_info_clarify",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Qua 3 lượt user vẫn chưa cho tên paper / tác giả / DOI → dataset_lookup yêu cầu query, agent phải gọi clarify hỏi lại thay vì đoán bừa một query rỗng."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Mình cần tra một bài báo."
+        },
+        {
+          "role": "user",
+          "content": "Tra trong dataset nội bộ ấy."
+        },
+        {
+          "role": "user",
+          "content": "Tra giúp mình đi."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify"
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "dataset_lookup",
+            "args": {
+              "query": "bài báo",
+              "max_results": 5
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "missing_info",
+        "failures": [
+          "missing tool call clarify",
+          "extra tool call dataset_lookup"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "dataset_lookup",
+          "args": {
+            "query": "bài báo",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "dataset_lookup",
+            "query": "bài báo",
+            "publication_year": null,
+            "total_matches": 1,
+            "items": [
+              {
+                "title": "Stress and Heart Rate Variability: A Meta-Analysis and Review of the Literature",
+                "authors": [
+                  "Hye-Geum Kim",
+                  "Eun‐Jin Cheon",
+                  "Dai-Seg Bai",
+                  "Young Hwan Lee",
+                  "Bon‐Hoon Koo"
+                ],
+                "publication_year": 2018,
+                "publication_date": "2018-02-27",
+                "doi": "https://doi.org/10.30773/pi.2017.08.17",
+                "openalex_id": "https://openalex.org/W2792140820",
+                "cited_by_count": 2274,
+                "match_score": 50.0
+              }
+            ],
+            "dataset": {
+              "path": "D:\\MyVin\\Day04_2A202601241_NguyenVanPhong\\starter_v0\\data\\dataset.json",
+              "source": "OpenAlex",
+              "item_count": 200
+            },
+            "error": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "MG02_multi_dataset_lookup_author",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Multi-turn ghép ngữ cảnh ra tên tác giả, và nguồn được chỉ định là dataset nội bộ → dataset_lookup, không phải papers (arXiv) hay lookup (web)."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Mình đang muốn tra theo tác giả."
+        },
+        {
+          "role": "user",
+          "content": "Tác giả tên Fred Shaffer."
+        },
+        {
+          "role": "user",
+          "content": "Liệt kê các paper của ông ấy trong dataset nội bộ giúp mình."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "dataset_lookup",
+            "args": {
+              "query": "Fred Shaffer"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "dataset_lookup",
+            "args": {
+              "query": "Fred Shaffer"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "dataset_lookup",
+          "args": {
+            "query": "Fred Shaffer"
+          },
+          "result": {
+            "tool": "dataset_lookup",
+            "query": "Fred Shaffer",
+            "publication_year": null,
+            "total_matches": 3,
+            "items": [
+              {
+                "title": "An Overview of Heart Rate Variability Metrics and Norms",
+                "authors": [
+                  "Fred Shaffer",
+                  "J. P. Ginsberg"
+                ],
+                "publication_year": 2017,
+                "publication_date": "2017-09-28",
+                "doi": "https://doi.org/10.3389/fpubh.2017.00258",
+                "openalex_id": "https://openalex.org/W2759190050",
+                "cited_by_count": 6938,
+                "match_score": 60.0
+              },
+              {
+                "title": "A healthy heart is not a metronome: an integrative review of the heart's anatomy and heart rate variability",
+                "authors": [
+                  "Fred Shaffer",
+                  "Rollin McCraty",
+                  "C Zerr"
+                ],
+                "publication_year": 2014,
+                "publication_date": "2014-09-30",
+                "doi": "https://doi.org/10.3389/fpsyg.2014.01040",
+                "openalex_id": "https://openalex.org/W2122464624",
+                "cited_by_count": 1857,
+                "match_score": 60.0
+              },
+              {
+                "title": "Heart Rate Variability: New Perspectives on Physiological Mechanisms, Assessment of Self-regulatory Capacity, and Health Risk",
+                "authors": [
+                  "Rollin McCraty",
+                  "Fred Shaffer"
+                ],
+                "publication_year": 2015,
+                "publication_date": "2015-01-01",
+                "doi": "https://doi.org/10.7453/gahmj.2014.073",
+                "openalex_id": "https://openalex.org/W2157846167",
+                "cited_by_count": 1040,
+                "match_score": 60.0
+              }
+            ],
+            "dataset": {
+              "path": "D:\\MyVin\\Day04_2A202601241_NguyenVanPhong\\starter_v0\\data\\dataset.json",
+              "source": "OpenAlex",
+              "item_count": 200
+            },
+            "error": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "MG03_multi_boundary_confirm_before_send",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Gửi ra kênh chung là hành động nhạy cảm không thể hoàn tác → phải clarify xác nhận yes_no trước, không được gọi thẳng send."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tóm tắt giúp mình paper Heart Rate Variability năm 1996."
+        },
+        {
+          "role": "user",
+          "content": "Ok bản tóm tắt ổn rồi."
+        },
+        {
+          "role": "user",
+          "content": "Giờ gửi bản tóm tắt đó lên Telegram cho cả team nhé."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "send",
+            "args": {
+              "text": "Bản tóm tắt paper Heart Rate Variability năm 1996 đã được hoàn thành. Xin vui lòng kiểm tra và cho ý kiến nếu cần chỉnh sửa thêm!",
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_boundary",
+        "failures": [
+          "missing tool call clarify",
+          "extra tool call send"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "send",
+          "args": {
+            "text": "Bản tóm tắt paper Heart Rate Variability năm 1996 đã được hoàn thành. Xin vui lòng kiểm tra và cho ý kiến nếu cần chỉnh sửa thêm!",
+            "confirmed": true
+          },
+          "result": {
+            "tool": "send_telegram",
+            "error": "RuntimeError",
+            "message": "Missing TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env var"
+          }
+        }
+      ]
+    },
+    {
+      "id": "MG04_multi_paper_text_from_arxiv_url",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Có arXiv URL và yêu cầu đọc nội dung bài báo → paper_text, không phải fetch (đọc HTML thường) hay dataset_lookup (chỉ có metadata)."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Mình có link này https://arxiv.org/abs/1706.03762."
+        },
+        {
+          "role": "user",
+          "content": "Đọc nội dung bài đó ra cho mình xem phần phương pháp."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "paper_text",
+            "args": {
+              "arxiv_url": "https://arxiv.org/abs/1706.03762"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "paper_text",
+            "args": {
+              "arxiv_url": "https://arxiv.org/abs/1706.03762",
+              "max_pages": 5,
+              "max_chars": 8000
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "paper_text",
+          "args": {
+            "arxiv_url": "https://arxiv.org/abs/1706.03762",
+            "max_pages": 5,
+            "max_chars": 8000
+          },
+          "result": {
+            "tool": "get_arxiv_paper_text",
+            "error": "RuntimeError",
+            "message": "Install pypdf first: pip install pypdf"
+          }
+        }
+      ]
+    },
+    {
+      "id": "MG05_multi_unnecessary_tool_from_context",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "what_it_tests": "Thông tin đã có sẵn trong ngữ cảnh và user nói rõ đừng tra lại → agent phải trả lời trực tiếp, gọi lại dataset_lookup là thừa."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Nãy bạn tra được paper Heart Rate Variability năm 1996, tác giả là Marek Malík đúng không."
+        },
+        {
+          "role": "user",
+          "content": "Nhắc lại đúng tên tác giả đó thôi, đừng tra lại nữa."
+        }
+      ],
+      "expect": {
+        "no_tool": true
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "Tác giả là Marek Malík.",
+        "case_failure_type": "unnecessary_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    }
+  ]
+}
