@@ -6,7 +6,7 @@
 | :-: | ----------------------------- | :------------: | --------------------------------------- | :--------------: | --------------------------------------------------------------------------------------------- |
 |  1  | **Nguyễn Văn Phong**  |  2A202601241  | Role 5 — Product Lead & Demo Presenter | **Leader** | `artifacts/REPORT.md`, `artifacts/version_log.csv`, Rehearse Demo                         |
 |  2  | **Vũ Huy Hoàng**      |  2A202601057  | Role 1 — Prompt & Agent Architect      |      Member      | `artifacts/system_prompt.md`, `artifacts/tools.yaml`, **REPORT.md,version_log.csv** |
-|  3  | **Nguyễn Thanh Phúc** |  2A202601345  | Role 2 — Tool Developer                |      Member      | `tools/<tool_moi>/`, `tools/__init__.py`, `.env` & API setup                            |
+|  3  | **Nguyễn Thanh Phúc** |  2A202601345  | Role 2 — Tool Developer                |      Member      | `tools/<tool_moi>/`, `tools/__init__.py`, `.env` & APIuutjfguutuuU setup                |
 |  4  | **Phạm Khánh Linh**   |  2A202601507  | Role 3 — Eval & QA Specialist          |      Member      | `data/eval_group.json`, `run_eval.py`, `analysis/*.csv`                                 |
 |  5  | **Lê Thị Yến Nhi**   |  2A202601031  | Role 4 — UI & Cloud Deployer           |      Member      | `app.py`, `requirements.txt`, Cloudflare Tunnel                                           |
 
