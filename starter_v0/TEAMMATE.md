@@ -41,11 +41,13 @@
     - Đăng ký hàm xử lý vào registry [tools/\_\_init\_\_.py](file:///c:/Users/THIS%20PC/Desktop/IT/AI%20THUC%20CHIEN/Lesson/Lesson5/lab/Day04_2A202601241_NguyenVanPhong/starter_v0/tools/__init__.py).
     - Cập nhật schema JSON trong [artifacts/tools.yaml](file:///c:/Users/THIS%20PC/Desktop/IT/AI%20THUC%20CHIEN/Lesson/Lesson5/lab/Day04_2A202601241_NguyenVanPhong/starter_v0/artifacts/tools.yaml).
   - Quản lý cấu hình API Keys trong file `.env` và chạy smoke test đảm bảo tool mới hoạt động chuẩn xác (`error: None`).
+  - *(Nếu có)* Dùng file dataset local Hugging Face `data/test-00000-of-00001.parquet` để làm nguồn dữ liệu tra cứu cho Tool mới.
 
 ---
 
 ### 4. Phạm Khánh Linh (MSV: 2A202601507) — **Role 3: Eval & QA Specialist**
 - **Nhiệm vụ chính**:
+  - Quản lý và khai thác tập dữ liệu **Hugging Face** vừa tải về tại `data/test-00000-of-00001.parquet`: đọc / lọc dữ liệu thực tế để sinh ra 10 kịch bản test case chất lượng.
   - Thiết kế đúng **10 test cases** kiểm thử riêng của nhóm trong [data/eval_group.json](file:///c:/Users/THIS%20PC/Desktop/IT/AI%20THUC%20CHIEN/Lesson/Lesson5/lab/Day04_2A202601241_NguyenVanPhong/starter_v0/data/eval_group.json) (5 single-turn + 5 multi-turn).
   - Chạy lệnh eval kiểm thử cho từng phiên bản (`python run_eval.py ...`).
   - Kiểm tra tính hợp lệ của kết quả metric (`provider_error_cases == 0`, `measured_cases == total_cases`).
