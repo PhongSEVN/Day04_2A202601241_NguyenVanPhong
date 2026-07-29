@@ -112,3 +112,13 @@ tools:
         max_pages: {type: integer, default: 5, description: "Maximum number of pages to retrieve."}
         max_chars: {type: integer, default: 8000, description: "Maximum number of characters to retrieve."}
       required: [arxiv_url]
+
+  - name: dataset_lookup
+    description: "Search the team's local dataset of 200 heart-rate-variability paper records (OpenAlex metadata) by paper title, author name, DOI, or OpenAlex ID. Prefer this over a web search when the user names a specific paper or author; it is offline and returns exact metadata (year, DOI, citation count). It returns metadata only — it has no abstract or full text."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Paper title, author name, DOI, or OpenAlex ID."}
+        publication_year: {type: integer, description: "Only return papers published in this exact year."}
+        max_results: {type: integer, default: 5, description: "Maximum number of paper records to return (1-10)."}
+      required: [query]
