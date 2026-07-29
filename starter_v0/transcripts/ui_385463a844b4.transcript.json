@@ -1,0 +1,342 @@
+{
+  "session_id": "385463a844b4",
+  "title": "cho mình 1 số bài báo hay về Heart",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "version": "v3",
+  "artifact_version": "v3+p4f911d6f1993+t3f8a8f39c337",
+  "prompt_hash": "4f911d6f1993f013f2468b43792741be9cdbbba02e73b8f82dda5e6fe2c5f658",
+  "tools_hash": "3f8a8f39c3373a974fd1a7796aa52e4347b06b4ca3605c0fcfb23876f68a58c8",
+  "created_at": "2026-07-29T12:16:55",
+  "updated_at": "2026-07-29T12:17:29",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-07-29T12:16:55",
+      "user": "cho mình 1 số bài báo hay về Heart",
+      "status": "answered",
+      "assistant_text": "Dưới đây là một số bài báo hay về \"Heart\":\n\n1. **[Shesop Healthcare: Android application to monitor heart rate variance, display influenza and stress condition using Polar H7](http://arxiv.org/abs/1607.04771v1)**\n   - **Tác giả**: Andrien Ivander Wijaya, Ary Setijadi Prihatmanto, Rifki Wijaya\n   - **Tóm tắt**: Bài báo giới thiệu hệ thống Shesop, một ứng dụng Android giúp theo dõi biến thiên nhịp tim, phân loại stress và tình trạng cúm. Ứng dụng sử dụng công nghệ Bluetooth Low Energy và có khả năng thu thập dữ liệu nhịp tim theo thời gian thực.\n   - **Ngày xuất bản**: 16/07/2016\n   - [PDF](https://arxiv.org/pdf/1607.04771v1)\n\n2. **[Dual Agreement Consistency Learning with Foundation Models for Semi-Supervised Fetal Heart Ultrasound Segmentation and Diagnosis](http://arxiv.org/abs/2603.18119v1)**\n   - **Tác giả**: Fangyijie Wang, Guénolé Silvestre, Kathleen M. Curran\n   - **Tóm tắt**: Bài báo đề xuất một phương pháp học bán giám sát cho phân đoạn và chẩn đoán siêu âm tim thai, kết hợp mô hình nền tảng với mạng nơ-ron tích chập để khai thác dữ liệu không được gán nhãn.\n   - **Ngày xuất bản**: 18/03/2026\n   - [PDF](https://arxiv.org/pdf/2603.18119v1)\n\n3. **[4D blood flow mapping using SPIM-microPIV in the developing zebrafish heart](http://arxiv.org/abs/1802.05646v1)**\n   - **Tác giả**: Vytautas Zickus, Jonathan M. Taylor\n   - **Tóm tắt**: Bài báo trình bày một nền tảng hình ảnh kết hợp giữa vi mô và vi lưu để tạo bản đồ dòng chảy 3D trong tim của phôi cá ngựa, giúp hiểu rõ hơn về chức năng tim.\n   - **Ngày xuất bản**: 15/02/2018\n   - [PDF](https://arxiv.org/pdf/1802.05646v1)\n\n4. **[Imaging the Developing Heart: Synchronized Timelapse Microscopy During Developmental Changes](http://arxiv.org/abs/1802.05663v1)**\n   - **Tác giả**: Carl J. Nelson, Charlotte Buckley, John J. Mullins, Martin A. Denvir, Jonathan Taylor\n   - **Tóm tắt**: Bài báo mô tả cách sử dụng hình ảnh để phân tích sự phát triển của tim, với các video thời gian thực được đồng bộ hóa để ghi lại các thay đổi hình dạng của tim.\n   - **Ngày xuất bản**: 15/02/2018\n   - [PDF](https://arxiv.org/pdf/1802.05663v1)\n\n5. **[Frequency Structure of Heart Rate Variability](http://arxiv.org/abs/1005.0776v2)**\n   - **Tác giả**: V. Mukhin\n   - **Tóm tắt**: Bài báo nghiên cứu cấu trúc tần số của biến thiên nhịp tim, phát hiện ra ít nhất bốn hiện tượng chu kỳ trong HRV, trong đó có hai hiện tượng chưa được khám phá.\n   - **Ngày xuất bản**: 05/05/2010\n   - [PDF](https://arxiv.org/pdf/1005.0776v2)\n\nNếu bạn cần thêm thông tin hoặc tóm tắt chi tiết về một bài báo cụ thể nào, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "papers",
+              "args": {
+                "query": "Heart",
+                "max_results": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "papers",
+              "args": {
+                "query": "Heart",
+                "max_results": 5
+              },
+              "result": {
+                "tool": "arxiv_search",
+                "query": "Heart",
+                "api_query": "all:Heart",
+                "total_results": 7778,
+                "items": [
+                  {
+                    "arxiv_id": "1607.04771v1",
+                    "title": "Shesop Healthcare: Android application to monitor heart rate variance, display influenza and stress condition using Polar H7",
+                    "summary": "Shesop is an integrated system to make human lives more easily and to help people in terms of healthcare. Stress and influenza classification is a part of Shesop's application for a healthcare devices such as smartwatch, polar and fitbit. The main objective of this paper is to create a proper application to implement the stress and influenza classification. The application use Android studio, XML and Java. Also, while creating this application, all design and program is considered to be available for future updates. The application needs an android smartphone with Bluetooth Low Energy technology (bluetooth v4.0 or above). SheSop application will accommodate data entry, device picker, data gathering process, result and saving the result. In the end, we could use the polar H7 and this application to get a real-time heart rate, Heart rate variability and diagnose our stress and influenza condition.",
+                    "authors": [
+                      "Andrien Ivander Wijaya",
+                      "Ary Setijadi Prihatmanto",
+                      "Rifki Wijaya"
+                    ],
+                    "published": "2016-07-16T17:22:25Z",
+                    "updated": "2016-07-16T17:22:25Z",
+                    "url": "http://arxiv.org/abs/1607.04771v1",
+                    "pdf_url": "https://arxiv.org/pdf/1607.04771v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.CY",
+                    "categories": [
+                      "cs.CY"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2603.18119v1",
+                    "title": "Dual Agreement Consistency Learning with Foundation Models for Semi-Supervised Fetal Heart Ultrasound Segmentation and Diagnosis",
+                    "summary": "Congenital heart disease (CHD) screening from fetal echocardiography requires accurate analysis of multiple standard cardiac views, yet developing reliable artificial intelligence models remains challenging due to limited annotations and variable image quality. In this work, we propose FM-DACL, a semi-supervised Dual Agreement Consistency Learning framework for the FETUS 2026 challenge on fetal heart ultrasound segmentation and diagnosis. The method combines a pretrained ultrasound foundation model (EchoCare) with a convolutional network through heterogeneous co-training and an exponential moving average teacher to better exploit unlabeled data. Experiments on the multi-center challenge dataset show that FM-DACL achieves a Dice score of 59.66 and NSD of 42.82 using heterogeneous backbones, demonstrating the feasibility of the proposed semi-supervised framework. These results suggest that FM-DACL provides a flexible approach for leveraging heterogeneous models in low-annotation fetal cardiac ultrasound analysis. The code is available on https://github.com/13204942/FM-DACL.",
+                    "authors": [
+                      "Fangyijie Wang",
+                      "Guénolé Silvestre",
+                      "Kathleen M. Curran"
+                    ],
+                    "published": "2026-03-18T15:50:44Z",
+                    "updated": "2026-03-18T15:50:44Z",
+                    "url": "http://arxiv.org/abs/2603.18119v1",
+                    "pdf_url": "https://arxiv.org/pdf/2603.18119v1",
+                    "source": "arxiv.org",
+                    "primary_category": "eess.IV",
+                    "categories": [
+                      "eess.IV"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "1802.05646v1",
+                    "title": "4D blood flow mapping using SPIM-microPIV in the developing zebrafish heart",
+                    "summary": "Fluid-structure interaction in the developing heart is an active area of research in developmental biology. However, investigation of heart dynamics is mostly limited to computational fluid dynamics simulations using heart wall structure information only, or single plane blood flow information - so there is a need for 3D + time resolved data to fully understand cardiac function. We present an imaging platform combining selective plane illumination microscopy (SPIM) with micro particle image velocimetry ({\\textmu}PIV) to enable 3D-resolved flow mapping in a microscopic environment, free from many of the sources of error and bias present in traditional epifluorescence-based {\\textmu}PIV systems. By using our new system in conjunction with optical heart beat synchronisation, we demonstrte the ability obtain non-invasive 3D + time resolved blood flow measurements in the heart of a living zebrafish embryo.",
+                    "authors": [
+                      "Vytautas Zickus",
+                      "Jonathan M. Taylor"
+                    ],
+                    "published": "2018-02-15T16:37:47Z",
+                    "updated": "2018-02-15T16:37:47Z",
+                    "url": "http://arxiv.org/abs/1802.05646v1",
+                    "pdf_url": "https://arxiv.org/pdf/1802.05646v1",
+                    "source": "arxiv.org",
+                    "primary_category": "q-bio.QM",
+                    "categories": [
+                      "q-bio.QM"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "1802.05663v1",
+                    "title": "Imaging the Developing Heart: Synchronized Timelapse Microscopy During Developmental Changes",
+                    "summary": "How do you use imaging to analyse the development of the heart, which not only changes shape but also undergoes constant, high-speed, quasi-periodic changes? We have integrated ideas from prospective and retrospective optical gating to capture long-term, phase-locked developmental time-lapse videos. In this paper we demonstrate the success of this approach over a key developmental time period: heart looping, where large changes in heart shape prevent previous prospective gating approaches from capturing phase-locked videos. We use the comparison with other approaches to in vivo heart imaging to highlight the importance of collecting the most appropriate data for the biological question.",
+                    "authors": [
+                      "Carl J. Nelson",
+                      "Charlotte Buckley",
+                      "John J. Mullins",
+                      "Martin A. Denvir",
+                      "Jonathan Taylor"
+                    ],
+                    "published": "2018-02-15T16:58:08Z",
+                    "updated": "2018-02-15T16:58:08Z",
+                    "url": "http://arxiv.org/abs/1802.05663v1",
+                    "pdf_url": "https://arxiv.org/pdf/1802.05663v1",
+                    "source": "arxiv.org",
+                    "primary_category": "q-bio.TO",
+                    "categories": [
+                      "q-bio.TO"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "1005.0776v2",
+                    "title": "Frequency Structure of Heart Rate Variability",
+                    "summary": "Factor structure of heart rate periodogram has been detected with factor analysis. The results showed that there are at least four periodical phenomena of HRV. Two of them have not been discovered and physiologically explained yet. Their frequency ranges are 0.21 to 0.31 1/beat with the peak at 0.26 1/beat and 0.25 to 0.5 1/beat with the peak 0.35 1/beat. Despite of differences of the peak frequencies the frequency rages of the factors are overlapped. Therefore, power of spectral density within any frequency range could not be a measure of a modulating physiological mechanism activity.",
+                    "authors": [
+                      "V. Mukhin"
+                    ],
+                    "published": "2010-05-05T15:21:09Z",
+                    "updated": "2010-05-06T13:43:06Z",
+                    "url": "http://arxiv.org/abs/1005.0776v2",
+                    "pdf_url": "https://arxiv.org/pdf/1005.0776v2",
+                    "source": "arxiv.org",
+                    "primary_category": "q-bio.TO",
+                    "categories": [
+                      "q-bio.TO"
+                    ]
+                  }
+                ],
+                "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+              },
+              "round": 1,
+              "status": "ok",
+              "error": null
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Dưới đây là một số bài báo hay về \"Heart\":\n\n1. **[Shesop Healthcare: Android application to monitor heart rate variance, display influenza and stress condition using Polar H7](http://arxiv.org/abs/1607.04771v1)**\n   - **Tác giả**: Andrien Ivander Wijaya, Ary Setijadi Prihatmanto, Rifki Wijaya\n   - **Tóm tắt**: Bài báo giới thiệu hệ thống Shesop, một ứng dụng Android giúp theo dõi biến thiên nhịp tim, phân loại stress và tình trạng cúm. Ứng dụng sử dụng công nghệ Bluetooth Low Energy và có khả năng thu thập dữ liệu nhịp tim theo thời gian thực.\n   - **Ngày xuất bản**: 16/07/2016\n   - [PDF](https://arxiv.org/pdf/1607.04771v1)\n\n2. **[Dual Agreement Consistency Learning with Foundation Models for Semi-Supervised Fetal Heart Ultrasound Segmentation and Diagnosis](http://arxiv.org/abs/2603.18119v1)**\n   - **Tác giả**: Fangyijie Wang, Guénolé Silvestre, Kathleen M. Curran\n   - **Tóm tắt**: Bài báo đề xuất một phương pháp học bán giám sát cho phân đoạn và chẩn đoán siêu âm tim thai, kết hợp mô hình nền tảng với mạng nơ-ron tích chập để khai thác dữ liệu không được gán nhãn.\n   - **Ngày xuất bản**: 18/03/2026\n   - [PDF](https://arxiv.org/pdf/2603.18119v1)\n\n3. **[4D blood flow mapping using SPIM-microPIV in the developing zebrafish heart](http://arxiv.org/abs/1802.05646v1)**\n   - **Tác giả**: Vytautas Zickus, Jonathan M. Taylor\n   - **Tóm tắt**: Bài báo trình bày một nền tảng hình ảnh kết hợp giữa vi mô và vi lưu để tạo bản đồ dòng chảy 3D trong tim của phôi cá ngựa, giúp hiểu rõ hơn về chức năng tim.\n   - **Ngày xuất bản**: 15/02/2018\n   - [PDF](https://arxiv.org/pdf/1802.05646v1)\n\n4. **[Imaging the Developing Heart: Synchronized Timelapse Microscopy During Developmental Changes](http://arxiv.org/abs/1802.05663v1)**\n   - **Tác giả**: Carl J. Nelson, Charlotte Buckley, John J. Mullins, Martin A. Denvir, Jonathan Taylor\n   - **Tóm tắt**: Bài báo mô tả cách sử dụng hình ảnh để phân tích sự phát triển của tim, với các video thời gian thực được đồng bộ hóa để ghi lại các thay đổi hình dạng của tim.\n   - **Ngày xuất bản**: 15/02/2018\n   - [PDF](https://arxiv.org/pdf/1802.05663v1)\n\n5. **[Frequency Structure of Heart Rate Variability](http://arxiv.org/abs/1005.0776v2)**\n   - **Tác giả**: V. Mukhin\n   - **Tóm tắt**: Bài báo nghiên cứu cấu trúc tần số của biến thiên nhịp tim, phát hiện ra ít nhất bốn hiện tượng chu kỳ trong HRV, trong đó có hai hiện tượng chưa được khám phá.\n   - **Ngày xuất bản**: 05/05/2010\n   - [PDF](https://arxiv.org/pdf/1005.0776v2)\n\nNếu bạn cần thêm thông tin hoặc tóm tắt chi tiết về một bài báo cụ thể nào, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "papers",
+          "args": {
+            "query": "Heart",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "arxiv_search",
+            "query": "Heart",
+            "api_query": "all:Heart",
+            "total_results": 7778,
+            "items": [
+              {
+                "arxiv_id": "1607.04771v1",
+                "title": "Shesop Healthcare: Android application to monitor heart rate variance, display influenza and stress condition using Polar H7",
+                "summary": "Shesop is an integrated system to make human lives more easily and to help people in terms of healthcare. Stress and influenza classification is a part of Shesop's application for a healthcare devices such as smartwatch, polar and fitbit. The main objective of this paper is to create a proper application to implement the stress and influenza classification. The application use Android studio, XML and Java. Also, while creating this application, all design and program is considered to be available for future updates. The application needs an android smartphone with Bluetooth Low Energy technology (bluetooth v4.0 or above). SheSop application will accommodate data entry, device picker, data gathering process, result and saving the result. In the end, we could use the polar H7 and this application to get a real-time heart rate, Heart rate variability and diagnose our stress and influenza condition.",
+                "authors": [
+                  "Andrien Ivander Wijaya",
+                  "Ary Setijadi Prihatmanto",
+                  "Rifki Wijaya"
+                ],
+                "published": "2016-07-16T17:22:25Z",
+                "updated": "2016-07-16T17:22:25Z",
+                "url": "http://arxiv.org/abs/1607.04771v1",
+                "pdf_url": "https://arxiv.org/pdf/1607.04771v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CY",
+                "categories": [
+                  "cs.CY"
+                ]
+              },
+              {
+                "arxiv_id": "2603.18119v1",
+                "title": "Dual Agreement Consistency Learning with Foundation Models for Semi-Supervised Fetal Heart Ultrasound Segmentation and Diagnosis",
+                "summary": "Congenital heart disease (CHD) screening from fetal echocardiography requires accurate analysis of multiple standard cardiac views, yet developing reliable artificial intelligence models remains challenging due to limited annotations and variable image quality. In this work, we propose FM-DACL, a semi-supervised Dual Agreement Consistency Learning framework for the FETUS 2026 challenge on fetal heart ultrasound segmentation and diagnosis. The method combines a pretrained ultrasound foundation model (EchoCare) with a convolutional network through heterogeneous co-training and an exponential moving average teacher to better exploit unlabeled data. Experiments on the multi-center challenge dataset show that FM-DACL achieves a Dice score of 59.66 and NSD of 42.82 using heterogeneous backbones, demonstrating the feasibility of the proposed semi-supervised framework. These results suggest that FM-DACL provides a flexible approach for leveraging heterogeneous models in low-annotation fetal cardiac ultrasound analysis. The code is available on https://github.com/13204942/FM-DACL.",
+                "authors": [
+                  "Fangyijie Wang",
+                  "Guénolé Silvestre",
+                  "Kathleen M. Curran"
+                ],
+                "published": "2026-03-18T15:50:44Z",
+                "updated": "2026-03-18T15:50:44Z",
+                "url": "http://arxiv.org/abs/2603.18119v1",
+                "pdf_url": "https://arxiv.org/pdf/2603.18119v1",
+                "source": "arxiv.org",
+                "primary_category": "eess.IV",
+                "categories": [
+                  "eess.IV"
+                ]
+              },
+              {
+                "arxiv_id": "1802.05646v1",
+                "title": "4D blood flow mapping using SPIM-microPIV in the developing zebrafish heart",
+                "summary": "Fluid-structure interaction in the developing heart is an active area of research in developmental biology. However, investigation of heart dynamics is mostly limited to computational fluid dynamics simulations using heart wall structure information only, or single plane blood flow information - so there is a need for 3D + time resolved data to fully understand cardiac function. We present an imaging platform combining selective plane illumination microscopy (SPIM) with micro particle image velocimetry ({\\textmu}PIV) to enable 3D-resolved flow mapping in a microscopic environment, free from many of the sources of error and bias present in traditional epifluorescence-based {\\textmu}PIV systems. By using our new system in conjunction with optical heart beat synchronisation, we demonstrte the ability obtain non-invasive 3D + time resolved blood flow measurements in the heart of a living zebrafish embryo.",
+                "authors": [
+                  "Vytautas Zickus",
+                  "Jonathan M. Taylor"
+                ],
+                "published": "2018-02-15T16:37:47Z",
+                "updated": "2018-02-15T16:37:47Z",
+                "url": "http://arxiv.org/abs/1802.05646v1",
+                "pdf_url": "https://arxiv.org/pdf/1802.05646v1",
+                "source": "arxiv.org",
+                "primary_category": "q-bio.QM",
+                "categories": [
+                  "q-bio.QM"
+                ]
+              },
+              {
+                "arxiv_id": "1802.05663v1",
+                "title": "Imaging the Developing Heart: Synchronized Timelapse Microscopy During Developmental Changes",
+                "summary": "How do you use imaging to analyse the development of the heart, which not only changes shape but also undergoes constant, high-speed, quasi-periodic changes? We have integrated ideas from prospective and retrospective optical gating to capture long-term, phase-locked developmental time-lapse videos. In this paper we demonstrate the success of this approach over a key developmental time period: heart looping, where large changes in heart shape prevent previous prospective gating approaches from capturing phase-locked videos. We use the comparison with other approaches to in vivo heart imaging to highlight the importance of collecting the most appropriate data for the biological question.",
+                "authors": [
+                  "Carl J. Nelson",
+                  "Charlotte Buckley",
+                  "John J. Mullins",
+                  "Martin A. Denvir",
+                  "Jonathan Taylor"
+                ],
+                "published": "2018-02-15T16:58:08Z",
+                "updated": "2018-02-15T16:58:08Z",
+                "url": "http://arxiv.org/abs/1802.05663v1",
+                "pdf_url": "https://arxiv.org/pdf/1802.05663v1",
+                "source": "arxiv.org",
+                "primary_category": "q-bio.TO",
+                "categories": [
+                  "q-bio.TO"
+                ]
+              },
+              {
+                "arxiv_id": "1005.0776v2",
+                "title": "Frequency Structure of Heart Rate Variability",
+                "summary": "Factor structure of heart rate periodogram has been detected with factor analysis. The results showed that there are at least four periodical phenomena of HRV. Two of them have not been discovered and physiologically explained yet. Their frequency ranges are 0.21 to 0.31 1/beat with the peak at 0.26 1/beat and 0.25 to 0.5 1/beat with the peak 0.35 1/beat. Despite of differences of the peak frequencies the frequency rages of the factors are overlapped. Therefore, power of spectral density within any frequency range could not be a measure of a modulating physiological mechanism activity.",
+                "authors": [
+                  "V. Mukhin"
+                ],
+                "published": "2010-05-05T15:21:09Z",
+                "updated": "2010-05-06T13:43:06Z",
+                "url": "http://arxiv.org/abs/1005.0776v2",
+                "pdf_url": "https://arxiv.org/pdf/1005.0776v2",
+                "source": "arxiv.org",
+                "primary_category": "q-bio.TO",
+                "categories": [
+                  "q-bio.TO"
+                ]
+              }
+            ],
+            "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+          },
+          "round": 1,
+          "status": "ok",
+          "error": null
+        }
+      ],
+      "ended_at": "2026-07-29T12:17:07"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-07-29T12:17:21",
+      "user": "Tóm tắt bài báo \"A hybrid model combining 1D-CNN and BERT for intelligent ECG arrhythmia classification\"",
+      "status": "answered",
+      "assistant_text": "Bài báo có tiêu đề **\"A hybrid model combining 1D-CNN and BERT for intelligent ECG arrhythmia classification\"** đề xuất một mô hình kết hợp giữa mạng nơ-ron tích chập một chiều (1D-CNN) và BERT để phân loại rối loạn nhịp tim từ điện tâm đồ (ECG). \n\n### Tóm tắt nội dung:\n- **Vấn đề**: Rối loạn nhịp tim là một bệnh tim mạch phổ biến, việc chẩn đoán sớm là rất quan trọng để ngăn ngừa các sự kiện tim mạch nghiêm trọng. Các phương pháp giải thích ECG truyền thống thường dựa vào phân tích thủ công, dẫn đến hiệu quả thấp và độ chính xác hạn chế.\n- **Giải pháp**: Bài báo đề xuất sử dụng các thuật toán thông minh để nhận diện tự động rối loạn nhịp tim, nhằm cải thiện độ chính xác trong phân loại.\n\n### Thông tin thêm:\n- **Nguồn**: OpenAlex\n- **Liên kết bài báo**: [Xem tại đây](https://doi.org/10.1038/s41598-025-28023-4)\n\nNếu bạn cần thêm thông tin chi tiết hoặc có câu hỏi khác, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "paper_summarizer",
+              "args": {
+                "query": "A hybrid model combining 1D-CNN and BERT for intelligent ECG arrhythmia classification"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "paper_summarizer",
+              "args": {
+                "query": "A hybrid model combining 1D-CNN and BERT for intelligent ECG arrhythmia classification"
+              },
+              "result": {
+                "title": "A hybrid model combining 1D-CNN and BERT for intelligent ECG arrhythmia classification",
+                "url": "https://doi.org/10.1038/s41598-025-28023-4",
+                "abstract": "Arrhythmia is a common cardiovascular disease, whose early diagnosis is crucial to prevent severe cardiac events. Traditional electrocardiogram (ECG) interpretation methods rely on manual analysis, which often suffers from low efficiency and limited accuracy. To address these issues, intelligent algorithms are increasingly being used for automatic arrhythmia recognition. However, many existing methods still face challenges in achieving accurate classification. In this paper, we propose a novel a...",
+                "summary": "Arrhythmia is a common cardiovascular disease, whose early diagnosis is crucial to prevent severe cardiac events. Traditional electrocardiogram (ECG) interpretation methods rely on manual analysis, which often suffers from low efficiency and limited accuracy",
+                "source": "OpenAlex",
+                "match_count": 3
+              },
+              "round": 1,
+              "status": "ok",
+              "error": null
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Bài báo có tiêu đề **\"A hybrid model combining 1D-CNN and BERT for intelligent ECG arrhythmia classification\"** đề xuất một mô hình kết hợp giữa mạng nơ-ron tích chập một chiều (1D-CNN) và BERT để phân loại rối loạn nhịp tim từ điện tâm đồ (ECG). \n\n### Tóm tắt nội dung:\n- **Vấn đề**: Rối loạn nhịp tim là một bệnh tim mạch phổ biến, việc chẩn đoán sớm là rất quan trọng để ngăn ngừa các sự kiện tim mạch nghiêm trọng. Các phương pháp giải thích ECG truyền thống thường dựa vào phân tích thủ công, dẫn đến hiệu quả thấp và độ chính xác hạn chế.\n- **Giải pháp**: Bài báo đề xuất sử dụng các thuật toán thông minh để nhận diện tự động rối loạn nhịp tim, nhằm cải thiện độ chính xác trong phân loại.\n\n### Thông tin thêm:\n- **Nguồn**: OpenAlex\n- **Liên kết bài báo**: [Xem tại đây](https://doi.org/10.1038/s41598-025-28023-4)\n\nNếu bạn cần thêm thông tin chi tiết hoặc có câu hỏi khác, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "paper_summarizer",
+          "args": {
+            "query": "A hybrid model combining 1D-CNN and BERT for intelligent ECG arrhythmia classification"
+          },
+          "result": {
+            "title": "A hybrid model combining 1D-CNN and BERT for intelligent ECG arrhythmia classification",
+            "url": "https://doi.org/10.1038/s41598-025-28023-4",
+            "abstract": "Arrhythmia is a common cardiovascular disease, whose early diagnosis is crucial to prevent severe cardiac events. Traditional electrocardiogram (ECG) interpretation methods rely on manual analysis, which often suffers from low efficiency and limited accuracy. To address these issues, intelligent algorithms are increasingly being used for automatic arrhythmia recognition. However, many existing methods still face challenges in achieving accurate classification. In this paper, we propose a novel a...",
+            "summary": "Arrhythmia is a common cardiovascular disease, whose early diagnosis is crucial to prevent severe cardiac events. Traditional electrocardiogram (ECG) interpretation methods rely on manual analysis, which often suffers from low efficiency and limited accuracy",
+            "source": "OpenAlex",
+            "match_count": 3
+          },
+          "round": 1,
+          "status": "ok",
+          "error": null
+        }
+      ],
+      "ended_at": "2026-07-29T12:17:29"
+    }
+  ],
+  "memories": [
+    "Đã tìm bài báo với từ khóa: \"Heart\""
+  ]
+}
