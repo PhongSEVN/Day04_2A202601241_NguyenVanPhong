@@ -24,7 +24,7 @@ SESSIONS_DIR = ROOT / "transcripts"
 
 load_lab_env(ROOT)
 
-PROVIDER_NAME = os.getenv("LLM_PROVIDER", "openrouter")
+PROVIDER_NAME = os.getenv("LLM_PROVIDER", "openai")
 HISTORY_WINDOW = 5
 DEFAULT_MAX_TOOL_ROUNDS = 4
 

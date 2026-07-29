@@ -45,7 +45,7 @@ graph TD
 | **00:00-05:00** | **Nguyễn Thanh Phúc (Role 2)** | Điền API Keys vào `.env`, run `python scripts/preflight_provider.py --provider openai` | Báo kết quả kết nối (✓/✗) cho Leader |
 | **00:00-05:00** | **Phạm Khánh Linh (Role 3)** | Load `data/dataset.json` (6,440 bài báo), kiểm tra schema, đếm items. Chuẩn bị run eval | Báo: "Dataset loaded, X items ready" |
 | **00:02-08:00** | **Vũ Huy Hoàng (Role 1)** | Đọc `artifacts/system_prompt.md` hiện tại, xác định điểm yếu | Note lại 3-5 điểm cần cải thiện cho v1 |
-| **00:05-08:00** | **Lê Thị Yến Nhi (Role 4)** | Setup Streamlit: `pip install streamlit` (nếu chưa), tạo skeleton `starter_v0/app.py` | Push stub app, test run `streamlit run app.py` |
+| **00:05-08:00** | **Lê Thị Yến Nhi (Role 4)** | Verify React client: `cd starter_v0/client && npm install`, test run `npm run dev` (port 5173) | React dev server running ✓ |
 | **00:08-12:00** | **Phạm Khánh Linh (Role 3)** | Run eval v0: `python run_eval.py --provider openai --version v0 --suite base --eval-cases data/eval_base.json` | Lưu log JSON vào `runs/v0_baseline.json`, báo accuracy score (expected ~70%) |
 
 **Handoff 12:00**: Phúc & Linh báo xong, có file log v0. Hoàng sẵn sàng edit prompt. Yến Nhi app ready.
@@ -62,7 +62,7 @@ graph TD
 | **12:00-20:00** | **Nguyễn Thanh Phúc (Role 2)** | Tạo `starter_v0/tools/paper_summarizer/tool.py` (query bài báo từ `data/dataset.json`, tóm tắt). Đăng ký vào `__init__.py`. Smoke test: import & call một lần | `paper_summarizer` ready, no errors |
 | **12:00-20:00** | **Phạm Khánh Linh (Role 3)** | Viết **10 test cases** vào `data/eval_group.json`: 5 single-turn (tóm tắt bài báo X), 5 multi-turn (hỏi chi tiết phương pháp). Sample từ `data/dataset.json` | `eval_group.json` 10 cases, valid JSON |
 | **12:00-18:00** | **Vũ Huy Hoàng (Role 1)** | Viết schema tool mới vào `artifacts/tools.yaml`. Update `system_prompt.md` với rule: *"Nếu user hỏi tóm tắt bài báo → gọi `paper_summarizer`. Nếu chưa có URL/tên → gọi `clarify` trước."* | `tools.yaml` schema OK, `system_prompt.md` v2 draft ready |
-| **12:00-25:00** | **Lê Thị Yến Nhi (Role 4)** | Hoàn thiện `app.py`: input field (topic/paper name), call Agent, display tóm tắt (Markdown), show tool trace (table). Test UI | `app.py` ready, `streamlit run app.py` chạy được |
+| **12:00-25:00** | **Lê Thị Yến Nhi (Role 4)** | Polish React client: ensure ChatPage.tsx displays tóm tắt + tool trace, sidebar show memories/tools. Test: `npm run dev` works, Flask backend kết nối (port 8000) | React UI ready, `npm run dev` + `python server.py` ✓ |
 | **25:00-30:00** | **Nguyễn Văn Phong (Leader)** | Review output từ 4 người, viết **Phần A REPORT**: intro, 3-5 demo examples, tool descriptions | `artifacts/REPORT.md` Part A done |
 
 **Handoff 30:00**: Tất cả report tại leader. Phúc, Hoàng, Linh ready cho Phase 3 (eval).
@@ -116,7 +116,7 @@ graph TD
 
 | **Thời gian** | **Người** | **Nhiệm vụ** | **Output/Handoff** |
 |---|---|---|---|
-| **50:00-52:00** | **Lê Thị Yến Nhi (Role 4)** | Terminal 1: `streamlit run app.py`. Terminal 2: `cloudflared tunnel --url http://localhost:8501`. Copy public URL | Tunnel URL (e.g. `https://xxx.trycloudflare.com`) → send to Leader |
+| **50:00-52:00** | **Lê Thị Yến Nhi (Role 4)** | Terminal 1: `cd starter_v0 && python server.py` (Flask port 8000). Terminal 2: `cd starter_v0/client && npm run dev` (Vite port 5173). Both running for demo | Both servers running ✓. Frontend http://localhost:5173 |
 | **50:00-55:00** | **Phạm Khánh Linh (Role 3)** & **Vũ Huy Hoàng (Role 1)** | Extract metrics from `runs/v0,v1,v2,v3` logs. Build Part B: (a) accuracy table v0→v3, (b) error analysis, (c) 10 test cases + results | Part B draft (Markdown table + analysis) → Leader |
 | **52:00-58:00** | **Nguyễn Văn Phong (Leader)** | (1) Add Tunnel URL to Part A. (2) Merge Part B data. (3) Add "Demo Guide" (3-5 example queries & expected output). (4) Final proofread | `artifacts/REPORT.md` FINAL ✓ |
 | **55:00-60:00** | **Cả 5 Thành Viên** | Final checklist: (1) All files in `starter_v0/` ? (2) `requirements.txt` complete? (3) `.env.example` ready? (4) `version_log.csv` filled? (5) No secrets in repo? (6) README.md exist? | ✅ All checks passed, ready to submit |
@@ -136,9 +136,9 @@ graph TD
 - [ ] Clone repo & open terminal
 - [ ] **Phúc**: API Key (OpenAI) ready, paste vào `.env`
 - [ ] **Linh**: Dataset `data/dataset.json` verified (6,440 items)
-- [ ] **Yến Nhi**: Python 3.10+, Streamlit 1.30+, `cloudflared` installed
+- [ ] **Yến Nhi**: Python 3.10+, Node.js 18+, npm installed. Verify: `cd starter_v0/client && npm install` 
 - [ ] **Hoàng**: Read `system_prompt.md`, `tools.yaml`, identify pain points
-- [ ] **Phong**: Laptop ready for demo, USB backup of `starter_v0/` folder
+- [ ] **Phong**: Laptop ready for demo, USB backup of `starter_v0/` folder, zoom/meet screen share ready
 - [ ] **All**: Phone timer app ready (start at 00:00 exactly)
 
 ---
@@ -151,7 +151,8 @@ graph TD
 - [ ] `starter_v0/artifacts/system_prompt.md` & `tools.yaml` (Đã tối ưu v3)
 - [ ] `starter_v0/artifacts/version_log.csv` (Đã ghi đủ v0, v1, v2, v3)
 - [ ] `starter_v0/artifacts/REPORT.md` (Đã hoàn thiện Phần A & B)
-- [ ] `starter_v0/app.py` (Giao diện Web Streamlit + Cloudflare Tunnel URL)
+- [ ] `starter_v0/server.py` (Flask backend chạy port 8000)
+- [ ] `starter_v0/client/src/pages/ChatPage.tsx` (React UI chạy port 5173)
 
 ---
 
@@ -160,9 +161,9 @@ graph TD
 | **Vấn đề** | **Giải Pháp** | **Người phụ trách** |
 |---|---|---|
 | API Key fail / Quota hết | Dùng Claude API thay thế, hoặc mock API response từ file | Phúc & Leader |
-| Eval script error | Chạy manual: import tool, call 3 test cases, tính accuracy bằng tay | Linh & Hoàng |
-| Streamlit crash | Fallback: simplify UI (input form + text output), skip Markdown fancy stuff | Yến Nhi |
-| Tunnel timeout | Use `localhost:8501` + chia sẻ screen qua Zoom/Meet cho audience | Yến Nhi & Leader |
+| Eval script error | Chạy manual: import tool, call 3 test cases, tính accuracy bằy tay | Linh & Hoàng |
+| React client crash | Fallback: hardcode test responses in ChatPage, skip AgentTrace, show only text | Yến Nhi |
+| Backend (Flask) down | Fallback: chia sẻ screen chạy curl test, mock response từ log file | Yến Nhi & Phong |
 | Phase 3 quá lâu (>20 phút) | Skip v1 → jump straight to v2 & v3. Run only v3_group suite, ignore v3_base | Phong & Linh |
 | Report không xong trước 60 phút | Submit Part A only, viết Part B bằng tay sau (score penalty nhưng submission valid) | Phong |
 

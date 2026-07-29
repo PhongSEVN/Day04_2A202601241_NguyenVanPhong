@@ -1,0 +1,527 @@
+{
+  "session_id": "47e90dbdbeb9",
+  "title": "hãy tóm tắt OPENALEX_API_KEY=8FqxsqMHcwfgdFb8VmXWIx # Open Alex",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "version": "v3",
+  "artifact_version": "v3+p4f911d6f1993+t3f8a8f39c337",
+  "prompt_hash": "4f911d6f1993f013f2468b43792741be9cdbbba02e73b8f82dda5e6fe2c5f658",
+  "tools_hash": "3f8a8f39c3373a974fd1a7796aa52e4347b06b4ca3605c0fcfb23876f68a58c8",
+  "created_at": "2026-07-29T12:08:02",
+  "updated_at": "2026-07-29T12:10:54",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-07-29T12:08:02",
+      "user": "hãy tóm tắt OPENALEX_API_KEY=8FqxsqMHcwfgdFb8VmXWIx # Open Alex",
+      "status": "answered",
+      "assistant_text": "Xin lỗi, tôi chỉ chuyên tóm tắt bài báo khoa học. Bạn có câu hỏi nào về nghiên cứu hoặc bài báo không?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "Xin lỗi, tôi chỉ chuyên tóm tắt bài báo khoa học. Bạn có câu hỏi nào về nghiên cứu hoặc bài báo không?",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [],
+      "ended_at": "2026-07-29T12:08:03"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-07-29T12:08:10",
+      "user": "Hãy tóm tắt  Heart Rate Variability",
+      "status": "answered",
+      "assistant_text": "Tôi đã tìm thấy thông tin về bài báo \"Heart Rate Variability\". Tuy nhiên, không có tóm tắt cụ thể cho bài báo này. Bạn có thể tham khảo bài báo qua liên kết sau: [Heart Rate Variability](https://doi.org/10.1161/01.cir.93.5.1043). \n\nNếu bạn cần thêm thông tin hoặc có câu hỏi khác, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "paper_summarizer",
+              "args": {
+                "query": "Heart Rate Variability"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "paper_summarizer",
+              "args": {
+                "query": "Heart Rate Variability"
+              },
+              "result": {
+                "title": "Heart Rate Variability",
+                "url": "https://doi.org/10.1161/01.cir.93.5.1043",
+                "abstract": "",
+                "summary": "Không có tóm tắt.",
+                "source": "OpenAlex",
+                "match_count": 3
+              },
+              "round": 1,
+              "status": "ok",
+              "error": null
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Tôi đã tìm thấy thông tin về bài báo \"Heart Rate Variability\". Tuy nhiên, không có tóm tắt cụ thể cho bài báo này. Bạn có thể tham khảo bài báo qua liên kết sau: [Heart Rate Variability](https://doi.org/10.1161/01.cir.93.5.1043). \n\nNếu bạn cần thêm thông tin hoặc có câu hỏi khác, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "paper_summarizer",
+          "args": {
+            "query": "Heart Rate Variability"
+          },
+          "result": {
+            "title": "Heart Rate Variability",
+            "url": "https://doi.org/10.1161/01.cir.93.5.1043",
+            "abstract": "",
+            "summary": "Không có tóm tắt.",
+            "source": "OpenAlex",
+            "match_count": 3
+          },
+          "round": 1,
+          "status": "ok",
+          "error": null
+        }
+      ],
+      "ended_at": "2026-07-29T12:08:15"
+    },
+    {
+      "turn_index": 3,
+      "started_at": "2026-07-29T12:08:33",
+      "user": "Hãy tóm tắt Attention is all you need",
+      "status": "answered",
+      "assistant_text": "Bài báo \"Attention Is All You Need\" giới thiệu một kiến trúc mạng mới gọi là Transformer, hoàn toàn dựa trên các cơ chế attention mà không cần sử dụng các mạng nơ-ron hồi tiếp (recurrent) hay tích chập (convolutional). Các mô hình này đã được thử nghiệm trên hai nhiệm vụ dịch máy và cho thấy hiệu suất vượt trội về chất lượng.\n\n- **Tiêu đề**: Attention Is All You Need\n- **Tóm tắt**: Các mô hình chuyển đổi chuỗi hiện tại chủ yếu dựa vào các mạng nơ-ron hồi tiếp hoặc tích chập trong cấu hình encoder-decoder. Các mô hình tốt nhất cũng kết nối encoder và decoder thông qua một cơ chế attention. Bài báo này đề xuất một kiến trúc mạng đơn giản, Transformer, hoàn toàn dựa trên các cơ chế attention.\n- **Nguồn**: OpenAlex\n- **Liên kết**: [Xem bài báo](https://doi.org/10.65215/2q58a426)\n\nNếu bạn cần thêm thông tin hoặc có câu hỏi khác, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "paper_summarizer",
+              "args": {
+                "query": "Attention is All You Need"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "paper_summarizer",
+              "args": {
+                "query": "Attention is All You Need"
+              },
+              "result": {
+                "title": "Attention Is All You Need",
+                "url": "https://doi.org/10.65215/2q58a426",
+                "abstract": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more ...",
+                "summary": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism",
+                "source": "OpenAlex",
+                "match_count": 3
+              },
+              "round": 1,
+              "status": "ok",
+              "error": null
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Bài báo \"Attention Is All You Need\" giới thiệu một kiến trúc mạng mới gọi là Transformer, hoàn toàn dựa trên các cơ chế attention mà không cần sử dụng các mạng nơ-ron hồi tiếp (recurrent) hay tích chập (convolutional). Các mô hình này đã được thử nghiệm trên hai nhiệm vụ dịch máy và cho thấy hiệu suất vượt trội về chất lượng.\n\n- **Tiêu đề**: Attention Is All You Need\n- **Tóm tắt**: Các mô hình chuyển đổi chuỗi hiện tại chủ yếu dựa vào các mạng nơ-ron hồi tiếp hoặc tích chập trong cấu hình encoder-decoder. Các mô hình tốt nhất cũng kết nối encoder và decoder thông qua một cơ chế attention. Bài báo này đề xuất một kiến trúc mạng đơn giản, Transformer, hoàn toàn dựa trên các cơ chế attention.\n- **Nguồn**: OpenAlex\n- **Liên kết**: [Xem bài báo](https://doi.org/10.65215/2q58a426)\n\nNếu bạn cần thêm thông tin hoặc có câu hỏi khác, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "paper_summarizer",
+          "args": {
+            "query": "Attention is All You Need"
+          },
+          "result": {
+            "title": "Attention Is All You Need",
+            "url": "https://doi.org/10.65215/2q58a426",
+            "abstract": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more ...",
+            "summary": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism",
+            "source": "OpenAlex",
+            "match_count": 3
+          },
+          "round": 1,
+          "status": "ok",
+          "error": null
+        }
+      ],
+      "ended_at": "2026-07-29T12:08:41"
+    },
+    {
+      "turn_index": 4,
+      "started_at": "2026-07-29T12:10:17",
+      "user": "Hãy tóm tắt Deep Residual Learning for Image Recognition (ResNet)",
+      "status": "answered",
+      "assistant_text": "Bài báo \"Deep Residual Learning for Image Recognition\" giới thiệu một khung học tập residual nhằm giúp việc đào tạo các mạng nơ-ron sâu trở nên dễ dàng hơn. Các mạng nơ-ron sâu hơn thường khó khăn hơn để đào tạo, và bài báo này đề xuất việc tái cấu trúc các lớp thành các hàm residual với tham chiếu đến đầu vào của lớp, thay vì học các hàm không tham chiếu.\n\n- **Tóm tắt**: Khung học tập residual giúp dễ dàng đào tạo các mạng nơ-ron sâu hơn so với các mạng trước đây.\n- **Nguồn**: OpenAlex\n- **Liên kết**: [Xem bài báo](https://doi.org/10.1109/cvpr.2016.90)\n\nNếu bạn cần thêm thông tin hoặc có câu hỏi khác, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "paper_summarizer",
+              "args": {
+                "query": "Deep Residual Learning for Image Recognition"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "paper_summarizer",
+              "args": {
+                "query": "Deep Residual Learning for Image Recognition"
+              },
+              "result": {
+                "title": "Deep Residual Learning for Image Recognition",
+                "url": "https://doi.org/10.1109/cvpr.2016.90",
+                "abstract": "Deeper neural networks are more difficult to train. We present a residual learning framework to ease the training of networks that are substantially deeper than those used previously. We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions. We provide comprehensive empirical evidence showing that these residual networks are easier to optimize, and can gain accuracy from considerably increased depth. On the...",
+                "summary": "Deeper neural networks are more difficult to train. We present a residual learning framework to ease the training of networks that are substantially deeper than those used previously",
+                "source": "OpenAlex",
+                "match_count": 3
+              },
+              "round": 1,
+              "status": "ok",
+              "error": null
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Bài báo \"Deep Residual Learning for Image Recognition\" giới thiệu một khung học tập residual nhằm giúp việc đào tạo các mạng nơ-ron sâu trở nên dễ dàng hơn. Các mạng nơ-ron sâu hơn thường khó khăn hơn để đào tạo, và bài báo này đề xuất việc tái cấu trúc các lớp thành các hàm residual với tham chiếu đến đầu vào của lớp, thay vì học các hàm không tham chiếu.\n\n- **Tóm tắt**: Khung học tập residual giúp dễ dàng đào tạo các mạng nơ-ron sâu hơn so với các mạng trước đây.\n- **Nguồn**: OpenAlex\n- **Liên kết**: [Xem bài báo](https://doi.org/10.1109/cvpr.2016.90)\n\nNếu bạn cần thêm thông tin hoặc có câu hỏi khác, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "paper_summarizer",
+          "args": {
+            "query": "Deep Residual Learning for Image Recognition"
+          },
+          "result": {
+            "title": "Deep Residual Learning for Image Recognition",
+            "url": "https://doi.org/10.1109/cvpr.2016.90",
+            "abstract": "Deeper neural networks are more difficult to train. We present a residual learning framework to ease the training of networks that are substantially deeper than those used previously. We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions. We provide comprehensive empirical evidence showing that these residual networks are easier to optimize, and can gain accuracy from considerably increased depth. On the...",
+            "summary": "Deeper neural networks are more difficult to train. We present a residual learning framework to ease the training of networks that are substantially deeper than those used previously",
+            "source": "OpenAlex",
+            "match_count": 3
+          },
+          "round": 1,
+          "status": "ok",
+          "error": null
+        }
+      ],
+      "ended_at": "2026-07-29T12:10:28"
+    },
+    {
+      "turn_index": 5,
+      "started_at": "2026-07-29T12:10:45",
+      "user": "Hãy cho mình thông tin về 1 số bài báo về Resnet",
+      "status": "answered",
+      "assistant_text": "Dưới đây là một số bài báo liên quan đến ResNet:\n\n1. **Quotient Network -- A Network Similar to ResNet but Learning Quotients**\n   - **Tác giả**: Peng Hui, Jiamuyang Zhao, Changxin Li, Qingzhen Zhu\n   - **Tóm tắt**: Bài báo đề xuất một mạng mới gọi là Quotient Network, giải quyết các vấn đề của ResNet bằng cách học tỷ lệ giữa các đặc trưng mục tiêu và các đặc trưng hiện có. Nghiên cứu cho thấy mạng này có thể cải thiện hiệu suất so với ResNet trên các tập dữ liệu CIFAR10, CIFAR100 và SVHN.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/2506.00992v1) | [PDF](https://arxiv.org/pdf/2506.00992v1)\n\n2. **Resnet in Resnet: Generalizing Residual Architectures**\n   - **Tác giả**: Sasha Targ, Diogo Almeida, Kevin Lyman\n   - **Tóm tắt**: Bài báo giới thiệu kiến trúc Resnet in Resnet (RiR), một kiến trúc hai luồng sâu giúp cải thiện hiệu suất so với ResNet và đạt được kết quả tốt hơn trên CIFAR-10 và CIFAR-100.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/1603.08029v1) | [PDF](https://arxiv.org/pdf/1603.08029v1)\n\n3. **Stable ResNet**\n   - **Tác giả**: Soufiane Hayou, Eugenio Clerico, Bobby He, George Deligiannidis, Arnaud Doucet, Judith Rousseau\n   - **Tóm tắt**: Bài báo giới thiệu một lớp ResNet mới gọi là Stable ResNet, giúp ổn định gradient và đảm bảo tính biểu đạt khi độ sâu tăng lên.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/2010.12859v2) | [PDF](https://arxiv.org/pdf/2010.12859v2)\n\n4. **ResNet or DenseNet? Introducing Dense Shortcuts to ResNet**\n   - **Tác giả**: Chaoning Zhang, Philipp Benz, Dawit Mureja Argaw, Seokju Lee, Junsik Kim, Francois Rameau, Jean-Charles Bazin, In So Kweon\n   - **Tóm tắt**: Bài báo phân tích sự khác biệt giữa ResNet và DenseNet, đồng thời đề xuất các shortcut dày đặc để cải thiện hiệu suất mà không cần thêm tài nguyên tính toán.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/2010.12496v1) | [PDF](https://arxiv.org/pdf/2010.12496v1)\n\n5. **MFI-ResNet: Efficient ResNet Architecture Optimization via MeanFlow Compression and Selective Incubation**\n   - **Tác giả**: Nuolin Sun, Linyuan Wang, Haonan Wei, Lei Li, Bin Yan\n   - **Tóm tắt**: Bài báo đề xuất MFI-ResNet, một kiến trúc tối ưu hóa ResNet thông qua việc nén và ươm chọn, cho thấy hiệu suất tốt hơn với số lượng tham số giảm.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/2511.12422v1) | [PDF](https://arxiv.org/pdf/2511.12422v1)\n\nNếu bạn cần thêm thông tin hoặc có câu hỏi khác, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "papers",
+              "args": {
+                "query": "ResNet",
+                "max_results": 5
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "papers",
+              "args": {
+                "query": "ResNet",
+                "max_results": 5
+              },
+              "result": {
+                "tool": "arxiv_search",
+                "query": "ResNet",
+                "api_query": "all:ResNet",
+                "total_results": 5404,
+                "items": [
+                  {
+                    "arxiv_id": "2506.00992v1",
+                    "title": "Quotient Network -- A Network Similar to ResNet but Learning Quotients",
+                    "summary": "The emergence of ResNet provides a powerful tool for training extremely deep networks. The core idea behind it is to change the learning goals of the network. It no longer learns new features from scratch but learns the difference between the target and existing features. However, the difference between the two kinds of features does not have an independent and clear meaning, and the amount of learning is based on the absolute rather than the relative difference, which is sensitive to the size of existing features. We propose a new network that perfectly solves these two problems while still having the advantages of ResNet. Specifically, it chooses to learn the quotient of the target features with the existing features, so we call it the quotient network. In order to enable this network to learn successfully and achieve higher performance, we propose some design rules for this network so that it can be trained efficiently and achieve better performance than ResNet. Experiments on the CIFAR10, CIFAR100, and SVHN datasets prove that this network can stably achieve considerable improvements over ResNet by simply making tiny corresponding changes to the original ResNet network without adding new parameters.",
+                    "authors": [
+                      "Peng Hui",
+                      "Jiamuyang Zhao",
+                      "Changxin Li",
+                      "Qingzhen Zhu"
+                    ],
+                    "published": "2025-06-01T12:46:43Z",
+                    "updated": "2025-06-01T12:46:43Z",
+                    "url": "http://arxiv.org/abs/2506.00992v1",
+                    "pdf_url": "https://arxiv.org/pdf/2506.00992v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.CV",
+                    "categories": [
+                      "cs.CV",
+                      "cs.AI"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "1603.08029v1",
+                    "title": "Resnet in Resnet: Generalizing Residual Architectures",
+                    "summary": "Residual networks (ResNets) have recently achieved state-of-the-art on challenging computer vision tasks. We introduce Resnet in Resnet (RiR): a deep dual-stream architecture that generalizes ResNets and standard CNNs and is easily implemented with no computational overhead. RiR consistently improves performance over ResNets, outperforms architectures with similar amounts of augmentation on CIFAR-10, and establishes a new state-of-the-art on CIFAR-100.",
+                    "authors": [
+                      "Sasha Targ",
+                      "Diogo Almeida",
+                      "Kevin Lyman"
+                    ],
+                    "published": "2016-03-25T20:55:40Z",
+                    "updated": "2016-03-25T20:55:40Z",
+                    "url": "http://arxiv.org/abs/1603.08029v1",
+                    "pdf_url": "https://arxiv.org/pdf/1603.08029v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.LG",
+                    "categories": [
+                      "cs.LG",
+                      "cs.CV",
+                      "cs.NE",
+                      "stat.ML"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2010.12859v2",
+                    "title": "Stable ResNet",
+                    "summary": "Deep ResNet architectures have achieved state of the art performance on many tasks. While they solve the problem of gradient vanishing, they might suffer from gradient exploding as the depth becomes large (Yang et al. 2017). Moreover, recent results have shown that ResNet might lose expressivity as the depth goes to infinity (Yang et al. 2017, Hayou et al. 2019). To resolve these issues, we introduce a new class of ResNet architectures, called Stable ResNet, that have the property of stabilizing the gradient while ensuring expressivity in the infinite depth limit.",
+                    "authors": [
+                      "Soufiane Hayou",
+                      "Eugenio Clerico",
+                      "Bobby He",
+                      "George Deligiannidis",
+                      "Arnaud Doucet",
+                      "Judith Rousseau"
+                    ],
+                    "published": "2020-10-24T10:27:24Z",
+                    "updated": "2021-03-18T17:27:53Z",
+                    "url": "http://arxiv.org/abs/2010.12859v2",
+                    "pdf_url": "https://arxiv.org/pdf/2010.12859v2",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.LG",
+                    "categories": [
+                      "cs.LG",
+                      "stat.ML"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2010.12496v1",
+                    "title": "ResNet or DenseNet? Introducing Dense Shortcuts to ResNet",
+                    "summary": "ResNet or DenseNet? Nowadays, most deep learning based approaches are implemented with seminal backbone networks, among them the two arguably most famous ones are ResNet and DenseNet. Despite their competitive performance and overwhelming popularity, inherent drawbacks exist for both of them. For ResNet, the identity shortcut that stabilizes training also limits its representation capacity, while DenseNet has a higher capacity with multi-layer feature concatenation. However, the dense concatenation causes a new problem of requiring high GPU memory and more training time. Partially due to this, it is not a trivial choice between ResNet and DenseNet. This paper provides a unified perspective of dense summation to analyze them, which facilitates a better understanding of their core difference. We further propose dense weighted normalized shortcuts as a solution to the dilemma between them. Our proposed dense shortcut inherits the design philosophy of simple design in ResNet and DenseNet. On several benchmark datasets, the experimental results show that the proposed DSNet achieves significantly better results than ResNet, and achieves comparable performance as DenseNet but requiring fewer computation resources.",
+                    "authors": [
+                      "Chaoning Zhang",
+                      "Philipp Benz",
+                      "Dawit Mureja Argaw",
+                      "Seokju Lee",
+                      "Junsik Kim",
+                      "Francois Rameau",
+                      "Jean-Charles Bazin",
+                      "In So Kweon"
+                    ],
+                    "published": "2020-10-23T16:00:15Z",
+                    "updated": "2020-10-23T16:00:15Z",
+                    "url": "http://arxiv.org/abs/2010.12496v1",
+                    "pdf_url": "https://arxiv.org/pdf/2010.12496v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.CV",
+                    "categories": [
+                      "cs.CV"
+                    ]
+                  },
+                  {
+                    "arxiv_id": "2511.12422v1",
+                    "title": "MFI-ResNet: Efficient ResNet Architecture Optimization via MeanFlow Compression and Selective Incubation",
+                    "summary": "ResNet has achieved tremendous success in computer vision through its residual connection mechanism. ResNet can be viewed as a discretized form of ordinary differential equations (ODEs). From this perspective, the multiple residual blocks within a single ResNet stage essentially perform multi-step discrete iterations of the feature transformation for that stage. The recently proposed flow matching model, MeanFlow, enables one-step generative modeling by learning the mean velocity field to transform distributions. Inspired by this, we propose MeanFlow-Incubated ResNet (MFI-ResNet), which employs a compression-expansion strategy to jointly improve parameter efficiency and discriminative performance. In the compression phase, we simplify the multi-layer structure within each ResNet stage to one or two MeanFlow modules to construct a lightweight meta model. In the expansion phase, we apply a selective incubation strategy to the first three stages, expanding them to match the residual block configuration of the baseline ResNet model, while keeping the last stage in MeanFlow form, and fine-tune the incubated model. Experimental results show that on CIFAR-10 and CIFAR-100 datasets, MFI-ResNet achieves remarkable parameter efficiency, reducing parameters by 46.28% and 45.59% compared to ResNet-50, while still improving accuracy by 0.23% and 0.17%, respectively. This demonstrates that generative flow-fields can effectively characterize the feature transformation process in ResNet, providing a new perspective for understanding the relationship between generative modeling and discriminative learning.",
+                    "authors": [
+                      "Nuolin Sun",
+                      "Linyuan Wang",
+                      "Haonan Wei",
+                      "Lei Li",
+                      "Bin Yan"
+                    ],
+                    "published": "2025-11-16T02:33:50Z",
+                    "updated": "2025-11-16T02:33:50Z",
+                    "url": "http://arxiv.org/abs/2511.12422v1",
+                    "pdf_url": "https://arxiv.org/pdf/2511.12422v1",
+                    "source": "arxiv.org",
+                    "primary_category": "cs.CV",
+                    "categories": [
+                      "cs.CV",
+                      "cs.AI"
+                    ]
+                  }
+                ],
+                "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+              },
+              "round": 1,
+              "status": "ok",
+              "error": null
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Dưới đây là một số bài báo liên quan đến ResNet:\n\n1. **Quotient Network -- A Network Similar to ResNet but Learning Quotients**\n   - **Tác giả**: Peng Hui, Jiamuyang Zhao, Changxin Li, Qingzhen Zhu\n   - **Tóm tắt**: Bài báo đề xuất một mạng mới gọi là Quotient Network, giải quyết các vấn đề của ResNet bằng cách học tỷ lệ giữa các đặc trưng mục tiêu và các đặc trưng hiện có. Nghiên cứu cho thấy mạng này có thể cải thiện hiệu suất so với ResNet trên các tập dữ liệu CIFAR10, CIFAR100 và SVHN.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/2506.00992v1) | [PDF](https://arxiv.org/pdf/2506.00992v1)\n\n2. **Resnet in Resnet: Generalizing Residual Architectures**\n   - **Tác giả**: Sasha Targ, Diogo Almeida, Kevin Lyman\n   - **Tóm tắt**: Bài báo giới thiệu kiến trúc Resnet in Resnet (RiR), một kiến trúc hai luồng sâu giúp cải thiện hiệu suất so với ResNet và đạt được kết quả tốt hơn trên CIFAR-10 và CIFAR-100.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/1603.08029v1) | [PDF](https://arxiv.org/pdf/1603.08029v1)\n\n3. **Stable ResNet**\n   - **Tác giả**: Soufiane Hayou, Eugenio Clerico, Bobby He, George Deligiannidis, Arnaud Doucet, Judith Rousseau\n   - **Tóm tắt**: Bài báo giới thiệu một lớp ResNet mới gọi là Stable ResNet, giúp ổn định gradient và đảm bảo tính biểu đạt khi độ sâu tăng lên.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/2010.12859v2) | [PDF](https://arxiv.org/pdf/2010.12859v2)\n\n4. **ResNet or DenseNet? Introducing Dense Shortcuts to ResNet**\n   - **Tác giả**: Chaoning Zhang, Philipp Benz, Dawit Mureja Argaw, Seokju Lee, Junsik Kim, Francois Rameau, Jean-Charles Bazin, In So Kweon\n   - **Tóm tắt**: Bài báo phân tích sự khác biệt giữa ResNet và DenseNet, đồng thời đề xuất các shortcut dày đặc để cải thiện hiệu suất mà không cần thêm tài nguyên tính toán.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/2010.12496v1) | [PDF](https://arxiv.org/pdf/2010.12496v1)\n\n5. **MFI-ResNet: Efficient ResNet Architecture Optimization via MeanFlow Compression and Selective Incubation**\n   - **Tác giả**: Nuolin Sun, Linyuan Wang, Haonan Wei, Lei Li, Bin Yan\n   - **Tóm tắt**: Bài báo đề xuất MFI-ResNet, một kiến trúc tối ưu hóa ResNet thông qua việc nén và ươm chọn, cho thấy hiệu suất tốt hơn với số lượng tham số giảm.\n   - **Liên kết**: [Xem bài báo](http://arxiv.org/abs/2511.12422v1) | [PDF](https://arxiv.org/pdf/2511.12422v1)\n\nNếu bạn cần thêm thông tin hoặc có câu hỏi khác, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "papers",
+          "args": {
+            "query": "ResNet",
+            "max_results": 5
+          },
+          "result": {
+            "tool": "arxiv_search",
+            "query": "ResNet",
+            "api_query": "all:ResNet",
+            "total_results": 5404,
+            "items": [
+              {
+                "arxiv_id": "2506.00992v1",
+                "title": "Quotient Network -- A Network Similar to ResNet but Learning Quotients",
+                "summary": "The emergence of ResNet provides a powerful tool for training extremely deep networks. The core idea behind it is to change the learning goals of the network. It no longer learns new features from scratch but learns the difference between the target and existing features. However, the difference between the two kinds of features does not have an independent and clear meaning, and the amount of learning is based on the absolute rather than the relative difference, which is sensitive to the size of existing features. We propose a new network that perfectly solves these two problems while still having the advantages of ResNet. Specifically, it chooses to learn the quotient of the target features with the existing features, so we call it the quotient network. In order to enable this network to learn successfully and achieve higher performance, we propose some design rules for this network so that it can be trained efficiently and achieve better performance than ResNet. Experiments on the CIFAR10, CIFAR100, and SVHN datasets prove that this network can stably achieve considerable improvements over ResNet by simply making tiny corresponding changes to the original ResNet network without adding new parameters.",
+                "authors": [
+                  "Peng Hui",
+                  "Jiamuyang Zhao",
+                  "Changxin Li",
+                  "Qingzhen Zhu"
+                ],
+                "published": "2025-06-01T12:46:43Z",
+                "updated": "2025-06-01T12:46:43Z",
+                "url": "http://arxiv.org/abs/2506.00992v1",
+                "pdf_url": "https://arxiv.org/pdf/2506.00992v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CV",
+                "categories": [
+                  "cs.CV",
+                  "cs.AI"
+                ]
+              },
+              {
+                "arxiv_id": "1603.08029v1",
+                "title": "Resnet in Resnet: Generalizing Residual Architectures",
+                "summary": "Residual networks (ResNets) have recently achieved state-of-the-art on challenging computer vision tasks. We introduce Resnet in Resnet (RiR): a deep dual-stream architecture that generalizes ResNets and standard CNNs and is easily implemented with no computational overhead. RiR consistently improves performance over ResNets, outperforms architectures with similar amounts of augmentation on CIFAR-10, and establishes a new state-of-the-art on CIFAR-100.",
+                "authors": [
+                  "Sasha Targ",
+                  "Diogo Almeida",
+                  "Kevin Lyman"
+                ],
+                "published": "2016-03-25T20:55:40Z",
+                "updated": "2016-03-25T20:55:40Z",
+                "url": "http://arxiv.org/abs/1603.08029v1",
+                "pdf_url": "https://arxiv.org/pdf/1603.08029v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.LG",
+                "categories": [
+                  "cs.LG",
+                  "cs.CV",
+                  "cs.NE",
+                  "stat.ML"
+                ]
+              },
+              {
+                "arxiv_id": "2010.12859v2",
+                "title": "Stable ResNet",
+                "summary": "Deep ResNet architectures have achieved state of the art performance on many tasks. While they solve the problem of gradient vanishing, they might suffer from gradient exploding as the depth becomes large (Yang et al. 2017). Moreover, recent results have shown that ResNet might lose expressivity as the depth goes to infinity (Yang et al. 2017, Hayou et al. 2019). To resolve these issues, we introduce a new class of ResNet architectures, called Stable ResNet, that have the property of stabilizing the gradient while ensuring expressivity in the infinite depth limit.",
+                "authors": [
+                  "Soufiane Hayou",
+                  "Eugenio Clerico",
+                  "Bobby He",
+                  "George Deligiannidis",
+                  "Arnaud Doucet",
+                  "Judith Rousseau"
+                ],
+                "published": "2020-10-24T10:27:24Z",
+                "updated": "2021-03-18T17:27:53Z",
+                "url": "http://arxiv.org/abs/2010.12859v2",
+                "pdf_url": "https://arxiv.org/pdf/2010.12859v2",
+                "source": "arxiv.org",
+                "primary_category": "cs.LG",
+                "categories": [
+                  "cs.LG",
+                  "stat.ML"
+                ]
+              },
+              {
+                "arxiv_id": "2010.12496v1",
+                "title": "ResNet or DenseNet? Introducing Dense Shortcuts to ResNet",
+                "summary": "ResNet or DenseNet? Nowadays, most deep learning based approaches are implemented with seminal backbone networks, among them the two arguably most famous ones are ResNet and DenseNet. Despite their competitive performance and overwhelming popularity, inherent drawbacks exist for both of them. For ResNet, the identity shortcut that stabilizes training also limits its representation capacity, while DenseNet has a higher capacity with multi-layer feature concatenation. However, the dense concatenation causes a new problem of requiring high GPU memory and more training time. Partially due to this, it is not a trivial choice between ResNet and DenseNet. This paper provides a unified perspective of dense summation to analyze them, which facilitates a better understanding of their core difference. We further propose dense weighted normalized shortcuts as a solution to the dilemma between them. Our proposed dense shortcut inherits the design philosophy of simple design in ResNet and DenseNet. On several benchmark datasets, the experimental results show that the proposed DSNet achieves significantly better results than ResNet, and achieves comparable performance as DenseNet but requiring fewer computation resources.",
+                "authors": [
+                  "Chaoning Zhang",
+                  "Philipp Benz",
+                  "Dawit Mureja Argaw",
+                  "Seokju Lee",
+                  "Junsik Kim",
+                  "Francois Rameau",
+                  "Jean-Charles Bazin",
+                  "In So Kweon"
+                ],
+                "published": "2020-10-23T16:00:15Z",
+                "updated": "2020-10-23T16:00:15Z",
+                "url": "http://arxiv.org/abs/2010.12496v1",
+                "pdf_url": "https://arxiv.org/pdf/2010.12496v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CV",
+                "categories": [
+                  "cs.CV"
+                ]
+              },
+              {
+                "arxiv_id": "2511.12422v1",
+                "title": "MFI-ResNet: Efficient ResNet Architecture Optimization via MeanFlow Compression and Selective Incubation",
+                "summary": "ResNet has achieved tremendous success in computer vision through its residual connection mechanism. ResNet can be viewed as a discretized form of ordinary differential equations (ODEs). From this perspective, the multiple residual blocks within a single ResNet stage essentially perform multi-step discrete iterations of the feature transformation for that stage. The recently proposed flow matching model, MeanFlow, enables one-step generative modeling by learning the mean velocity field to transform distributions. Inspired by this, we propose MeanFlow-Incubated ResNet (MFI-ResNet), which employs a compression-expansion strategy to jointly improve parameter efficiency and discriminative performance. In the compression phase, we simplify the multi-layer structure within each ResNet stage to one or two MeanFlow modules to construct a lightweight meta model. In the expansion phase, we apply a selective incubation strategy to the first three stages, expanding them to match the residual block configuration of the baseline ResNet model, while keeping the last stage in MeanFlow form, and fine-tune the incubated model. Experimental results show that on CIFAR-10 and CIFAR-100 datasets, MFI-ResNet achieves remarkable parameter efficiency, reducing parameters by 46.28% and 45.59% compared to ResNet-50, while still improving accuracy by 0.23% and 0.17%, respectively. This demonstrates that generative flow-fields can effectively characterize the feature transformation process in ResNet, providing a new perspective for understanding the relationship between generative modeling and discriminative learning.",
+                "authors": [
+                  "Nuolin Sun",
+                  "Linyuan Wang",
+                  "Haonan Wei",
+                  "Lei Li",
+                  "Bin Yan"
+                ],
+                "published": "2025-11-16T02:33:50Z",
+                "updated": "2025-11-16T02:33:50Z",
+                "url": "http://arxiv.org/abs/2511.12422v1",
+                "pdf_url": "https://arxiv.org/pdf/2511.12422v1",
+                "source": "arxiv.org",
+                "primary_category": "cs.CV",
+                "categories": [
+                  "cs.CV",
+                  "cs.AI"
+                ]
+              }
+            ],
+            "rate_limit_note": "arXiv may return 429 if called too frequently; this tool waits at least 3 seconds between requests in-process."
+          },
+          "round": 1,
+          "status": "ok",
+          "error": null
+        }
+      ],
+      "ended_at": "2026-07-29T12:10:54"
+    }
+  ],
+  "memories": [
+    "Đã tìm bài báo với từ khóa: \"ResNet\""
+  ]
+}
