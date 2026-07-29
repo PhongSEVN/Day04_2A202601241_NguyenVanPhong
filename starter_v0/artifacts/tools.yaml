@@ -112,3 +112,23 @@ tools:
         max_pages: {type: integer, default: 5, description: "Maximum number of pages to retrieve."}
         max_chars: {type: integer, default: 8000, description: "Maximum number of characters to retrieve."}
       required: [arxiv_url]
+
+  - name: dataset_lookup
+    description: "Search the local scientific-paper dataset by title, author, DOI, or OpenAlex ID. Use for papers contained in the local dataset; it returns metadata, not full-text summaries."
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          default: ""
+          description: "Paper title, author name, DOI, or OpenAlex ID."
+        publication_year:
+          type: integer
+          description: "Optional publication year filter."
+        max_results:
+          type: integer
+          default: 5
+          minimum: 1
+          maximum: 10
+          description: "Maximum number of matching papers."
+      required: [query]
