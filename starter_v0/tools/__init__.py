@@ -18,6 +18,7 @@ from .social_search.tool import search_tweets
 from .send.tool import send_telegram
 from .lookup.tool import web_search
 from .dataset_lookup.tool import dataset_lookup
+from .paper_summarizer.tool import paper_summarizer
 
 
 # NOTE (starter_v0): tool names here are intentionally vague. These keys are the
@@ -37,6 +38,7 @@ TOOL_FUNCTIONS = {
     "papers": arxiv_search,
     "paper_text": get_arxiv_paper_text,
     "dataset_lookup": dataset_lookup,
+    "paper_summarizer": paper_summarizer,
 }
 
 
