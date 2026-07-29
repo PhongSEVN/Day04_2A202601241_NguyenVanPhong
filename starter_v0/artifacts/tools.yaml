@@ -122,3 +122,33 @@ tools:
         policy_area: {type: string, enum: [all, ai_research, source_citation, data_privacy, external_publishing, tool_usage], default: "all", description: "Select a specific policy area if known."}
         top_k: {type: integer, default: 3, description: "Maximum number of policy documents or passages to return."}
       required: [query]
+
+  - name: papers
+    description: "Search for scientific papers by keyword. Use only when the user asks about academic papers or research literature."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Paper search query."}
+        max_results: {type: integer, default: 5, description: "Maximum number of paper results."}
+        sort_by: {type: string, enum: [relevance, lastUpdatedDate, submittedDate], default: "relevance", description: "Sort order for paper results."}
+      required: [query]
+
+  - name: paper_text
+    description: "Retrieve text content from a paper when the user provides a paper identifier or URL."
+    parameters:
+      type: object
+      properties:
+        arxiv_url: {type: string, default: "", description: "ArXiv URL or paper identifier."}
+        max_pages: {type: integer, default: 5, description: "Maximum number of pages to retrieve."}
+        max_chars: {type: integer, default: 8000, description: "Maximum number of characters to retrieve."}
+      required: [arxiv_url]
+
+  - name: dataset_lookup
+    description: "Search the team's local dataset of 200 heart-rate-variability paper records (OpenAlex metadata) by paper title, author name, DOI, or OpenAlex ID. Prefer this over a web search when the user names a specific paper or author; it is offline and returns exact metadata (year, DOI, citation count). It returns metadata only — it has no abstract or full text."
+    parameters:
+      type: object
+      properties:
+        query: {type: string, default: "", description: "Paper title, author name, DOI, or OpenAlex ID."}
+        publication_year: {type: integer, description: "Only return papers published in this exact year."}
+        max_results: {type: integer, default: 5, description: "Maximum number of paper records to return (1-10)."}
+      required: [query]

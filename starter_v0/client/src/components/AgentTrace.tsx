@@ -15,7 +15,10 @@ const STATUS_LABEL: Record<TurnStatus, string> = {
 };
 
 function isErrorResult(result: unknown): boolean {
-  return typeof result === "object" && result !== null && "error" in (result as Record<string, unknown>);
+  // Một số tool (vd: dataset_lookup) luôn trả `error` với giá trị null khi thành công,
+  // nên phải xét giá trị chứ không chỉ xét sự tồn tại của key.
+  if (typeof result !== "object" || result === null) return false;
+  return Boolean((result as Record<string, unknown>).error);
 }
 
 const EVENT_STATUS_STYLE: Record<ToolEventStatus, { label: string; className: string }> = {
