@@ -24,6 +24,7 @@ Description nêu rõ khi nào dùng (user nhắc tên paper/tác giả/DOI cụ 
 ### 1.2 `data/eval_group.json` — viết lại 10 case
 
 **Lỗi của bộ cũ:**
+
 - Cả 10 case chỉ expect `fetch` và `lookup`. **Không case nào test `dataset_lookup`** — tool duy nhất
   nhóm tự viết. Cũng không case nào chạm `papers` / `paper_text`, trong khi đề tài là tóm tắt nghiên cứu khoa học.
 - Nhãn sai: `MG01` gắn `missing_info` nhưng expect `lookup` (phải là `clarify`);
@@ -35,18 +36,18 @@ Description nêu rõ khi nào dùng (user nhắc tên paper/tác giả/DOI cụ 
 
 **Bộ mới — 10 case, phủ đủ 6 failure_type:**
 
-| ID | Loại | Kiểu | Test gì |
-|---|---|---|---|
-| `SG01_dataset_lookup_by_doi` | wrong_tool | single | DOI + "dataset nội bộ" → `dataset_lookup`, không `fetch` |
-| `SG02_dataset_lookup_year_filter` | wrong_arg_value | single | Phải truyền `publication_year=1996` để lọc trùng tên |
-| `SG03_lookup_news_timeframe` | wrong_arg_value | single | `topic=news` + `timeframe=week` |
-| `SG04_no_tool_general_knowledge` | unnecessary_tool | single | "HRV viết tắt của gì" → không gọi tool |
-| `SG05_out_of_scope_medical_advice` | out_of_scope | single | Từ chối chẩn đoán y tế cá nhân |
-| `MG01_multi_missing_info_clarify` | missing_info | multi | 3 lượt vẫn thiếu tên paper → `clarify` |
-| `MG02_multi_dataset_lookup_author` | wrong_tool | multi | Ghép ngữ cảnh ra "Fred Shaffer" → `dataset_lookup` |
-| `MG03_multi_boundary_confirm_before_send` | wrong_boundary | multi | Gửi Telegram → `clarify(response_type=yes_no)` trước |
-| `MG04_multi_paper_text_from_arxiv_url` | wrong_tool | multi | arXiv URL + đọc nội dung → `paper_text` |
-| `MG05_multi_unnecessary_tool_from_context` | unnecessary_tool | multi | Đã có trong ngữ cảnh → không tra lại |
+| ID                                           | Loại            | Kiểu  | Test gì                                                        |
+| -------------------------------------------- | ---------------- | ------ | --------------------------------------------------------------- |
+| `SG01_dataset_lookup_by_doi`               | wrong_tool       | single | DOI + "dataset nội bộ" →`dataset_lookup`, không `fetch` |
+| `SG02_dataset_lookup_year_filter`          | wrong_arg_value  | single | Phải truyền`publication_year=1996` để lọc trùng tên    |
+| `SG03_lookup_news_timeframe`               | wrong_arg_value  | single | `topic=news` + `timeframe=week`                             |
+| `SG04_no_tool_general_knowledge`           | unnecessary_tool | single | "HRV viết tắt của gì" → không gọi tool                   |
+| `SG05_out_of_scope_medical_advice`         | out_of_scope     | single | Từ chối chẩn đoán y tế cá nhân                          |
+| `MG01_multi_missing_info_clarify`          | missing_info     | multi  | 3 lượt vẫn thiếu tên paper →`clarify`                   |
+| `MG02_multi_dataset_lookup_author`         | wrong_tool       | multi  | Ghép ngữ cảnh ra "Fred Shaffer" →`dataset_lookup`         |
+| `MG03_multi_boundary_confirm_before_send`  | wrong_boundary   | multi  | Gửi Telegram →`clarify(response_type=yes_no)` trước       |
+| `MG04_multi_paper_text_from_arxiv_url`     | wrong_tool       | multi  | arXiv URL + đọc nội dung →`paper_text`                    |
+| `MG05_multi_unnecessary_tool_from_context` | unnecessary_tool | multi  | Đã có trong ngữ cảnh → không tra lại                    |
 
 Đã verify: `validate_expected_tools` PASS, 5 single + 5 multi, mọi multi-turn kết thúc bằng user turn,
 mọi case đủ `id` / `phase` / `failure_type` / `expect` / `metadata.what_it_tests`.
@@ -117,6 +118,7 @@ Kiểm tra luôn `FIRECRAWL_API_KEY` (tool `fetch`) — 5/10 case eval_group cũ
 ### 2.3 → Phạm Khánh Linh (Role 3): chạy lại eval
 
 Hai lý do bắt buộc chạy lại:
+
 1. `tools.yaml` giờ có 11 tool thay vì 10 → kết quả trên `suite=base` có thể đổi.
 2. `eval_group.json` đã thay toàn bộ 10 case → chưa có số liệu nào cho suite group.
 
@@ -131,13 +133,13 @@ python run_eval.py --provider openai --version v2 --suite group --eval-cases dat
 
 **(a) Các run đang trộn provider — dễ kết luận sai.**
 
-| Run | Provider | prompt_hash | routing | args |
-|---|---|---|---|---|
-| v0 (09:30) | **openai** | `eb1c81` | 0.75 | 0.70 |
-| v0 (11:00) | openrouter | `39d846` | 0.95 | 0.95 |
-| v0 (11:01) | openrouter | `39d846` | 0.95 | 0.95 |
-| v1 (11:02) | **openai** | `a6cca8` | 0.90 | 0.90 |
-| v1 (11:03) | **openai** | `a6cca8` | 0.95 | 0.95 |
+| Run        | Provider         | prompt_hash | routing | args |
+| ---------- | ---------------- | ----------- | ------- | ---- |
+| v0 (09:30) | **openai** | `eb1c81`  | 0.75    | 0.70 |
+| v0 (11:00) | openrouter       | `39d846`  | 0.95    | 0.95 |
+| v0 (11:01) | openrouter       | `39d846`  | 0.95    | 0.95 |
+| v1 (11:02) | **openai** | `a6cca8`  | 0.90    | 0.90 |
+| v1 (11:03) | **openai** | `a6cca8`  | 0.95    | 0.95 |
 
 Nếu lấy v0 openrouter (0.95) so với v1 openai (0.95) → báo cáo sẽ kết luận **"không cải thiện"**, sai.
 So đúng cùng provider `openai`: **v0 → v1 là 0.75 → 0.95 routing, 0.70 → 0.95 args**.
@@ -162,6 +164,6 @@ README dòng 28 và 31 cho phép mọi framework nên không sai yêu cầu, nh�
 - [ ] `version_log.csv` cần thêm dòng cho v2 và v3 (hiện có v0, v1, v2-pending)
 - [ ] `REPORT.md` Phần A + Phần B
 - [ ] `transcripts/` mới có 2 file; README dòng 253 yêu cầu **3 kịch bản live turn cụ thể**:
-      (1) research bình thường ✓ đã có — (2) thiếu thông tin rồi bổ sung ở lượt sau ✗ — (3) hành động nhạy cảm kiểm tra boundary ✗
+  (1) research bình thường ✓ đã có — (2) thiếu thông tin rồi bổ sung ở lượt sau ✗ — (3) hành động nhạy cảm kiểm tra boundary ✗
 - [ ] URL Cloudflare Tunnel dán vào REPORT Phần A: `https://theory-slide-incidents-automobiles.trycloudflare.com`
-      (đã test HTTP 200 — **đừng tắt `cloudflared`**, chạy lại sẽ sinh URL ngẫu nhiên mới)
+  (đã test HTTP 200 — **đừng tắt `cloudflared`**, chạy lại sẽ sinh URL ngẫu nhiên mới)
